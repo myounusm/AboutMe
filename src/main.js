@@ -1,0 +1,247 @@
+import './style.css'
+import {
+  profile,
+  about,
+  experience,
+  skills,
+  projects,
+  contact,
+} from './content.js'
+
+const app = document.querySelector('#app')
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+}
+
+function renderSkills() {
+  return skills.groups
+    .map(
+      (group) => `
+      <div class="skill-group reveal">
+        <h3 class="skill-label">${escapeHtml(group.label)}</h3>
+        <ul class="skill-list">
+          ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+        </ul>
+      </div>`,
+    )
+    .join('')
+}
+
+function renderExperience() {
+  return experience
+    .map(
+      (job) => `
+      <article class="timeline-item reveal">
+        <div class="timeline-meta">
+          <p class="timeline-period">${escapeHtml(job.period)}</p>
+        </div>
+        <div class="timeline-body">
+          <h3>${escapeHtml(job.role)}</h3>
+          <p class="timeline-company">${escapeHtml(job.company)}</p>
+          <p class="timeline-summary">${escapeHtml(job.summary)}</p>
+          <ul>
+            ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
+          </ul>
+        </div>
+      </article>`,
+    )
+    .join('')
+}
+
+function renderProjects() {
+  return projects
+    .map(
+      (project) => `
+      <a
+        class="project-row reveal"
+        href="${escapeHtml(project.link)}"
+        ${project.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}
+      >
+        <div class="project-main">
+          <div class="project-title-row">
+            <h3>${escapeHtml(project.name)}</h3>
+            <span class="project-year">${escapeHtml(project.year)}</span>
+          </div>
+          <p>${escapeHtml(project.description)}</p>
+          <p class="project-stack">${project.stack.map(escapeHtml).join(' · ')}</p>
+        </div>
+        <span class="project-arrow" aria-hidden="true">→</span>
+      </a>`,
+    )
+    .join('')
+}
+
+const socialLinks = [
+  profile.github
+    ? `<a href="${escapeHtml(profile.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>`
+    : '',
+  profile.linkedin
+    ? `<a href="${escapeHtml(profile.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`
+    : '',
+  `<a href="mailto:${escapeHtml(profile.email)}">Email</a>`,
+]
+  .filter(Boolean)
+  .join('')
+
+app.innerHTML = `
+  <div class="page-bg" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top">${escapeHtml(profile.shortName)}</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Introduction">
+      <div
+        class="hero-media"
+        style="--hero-image: url('${escapeHtml(profile.heroImage)}')"
+        role="img"
+        aria-label="${escapeHtml(profile.heroImageAlt)}"
+      ></div>
+      <div class="hero-veil"></div>
+      <div class="hero-content">
+        <p class="hero-brand reveal-hero" style="--d: 0">${escapeHtml(profile.name)}</p>
+        <h1 class="hero-title reveal-hero" style="--d: 1">
+          ${escapeHtml(profile.title)} crafting dependable products.
+        </h1>
+        <p class="hero-tagline reveal-hero" style="--d: 2">${escapeHtml(profile.tagline)}</p>
+        <div class="hero-actions reveal-hero" style="--d: 3">
+          <a class="btn btn-primary" href="#work">View work</a>
+          <a class="btn btn-ghost" href="mailto:${escapeHtml(profile.email)}">Get in touch</a>
+        </div>
+      </div>
+      <a class="scroll-hint reveal-hero" style="--d: 4" href="#work" aria-label="Scroll to work">
+        <span></span>
+      </a>
+    </section>
+
+    <section id="work" class="section section-work">
+      <div class="section-head reveal">
+        <h2>Selected work</h2>
+        <p>A few projects that show how I think and build.</p>
+      </div>
+      <div class="project-list">
+        ${renderProjects()}
+      </div>
+    </section>
+
+    <section id="experience" class="section section-experience">
+      <div class="section-head reveal">
+        <h2>Experience</h2>
+        <p>Where I’ve built, shipped, and grown.</p>
+      </div>
+      <div class="timeline">
+        ${renderExperience()}
+      </div>
+    </section>
+
+    <section id="skills" class="section section-skills">
+      <div class="section-head reveal">
+        <h2>${escapeHtml(skills.heading)}</h2>
+        <p>Tools I reach for most often.</p>
+      </div>
+      <div class="skills-grid">
+        ${renderSkills()}
+      </div>
+    </section>
+
+    <section id="about" class="section section-about">
+      <div class="about-layout">
+        <div class="section-head reveal">
+          <h2>${escapeHtml(about.heading)}</h2>
+          <p class="about-lead">${escapeHtml(about.lead)}</p>
+        </div>
+        <p class="about-body reveal">${escapeHtml(about.body)}</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section section-contact">
+      <div class="contact-panel reveal">
+        <h2>${escapeHtml(contact.heading)}</h2>
+        <p>${escapeHtml(contact.body)}</p>
+        <p class="contact-meta">${escapeHtml(profile.location)}</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">${escapeHtml(contact.cta)}</a>
+          <div class="socials">${socialLinks}</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© ${new Date().getFullYear()} ${escapeHtml(profile.name)}</p>
+    <a href="#top">Back to top</a>
+  </footer>
+`
+
+function initReveal() {
+  const nodes = document.querySelectorAll('.reveal')
+  if (!('IntersectionObserver' in window)) {
+    nodes.forEach((node) => node.classList.add('is-visible'))
+    return
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.16, rootMargin: '0px 0px -8% 0px' },
+  )
+
+  nodes.forEach((node) => observer.observe(node))
+}
+
+function initHeader() {
+  const header = document.querySelector('.site-header')
+  const onScroll = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 24)
+  }
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+}
+
+function initHeroParallax() {
+  const media = document.querySelector('.hero-media')
+  if (!media || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return
+  }
+
+  let ticking = false
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        const y = Math.min(window.scrollY, window.innerHeight)
+        media.style.transform = `translate3d(0, ${y * 0.18}px, 0) scale(1.06)`
+        ticking = false
+      })
+    },
+    { passive: true },
+  )
+}
+
+requestAnimationFrame(() => {
+  document.body.classList.add('is-ready')
+  initReveal()
+  initHeader()
+  initHeroParallax()
+})

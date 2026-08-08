@@ -2,11 +2,11 @@
 
 Personal CV and portfolio site for [Mohammed Younus Mohiuddin](https://github.com/myounusm).
 
-Content is populated from `public/Younus_CV.pdf`.
+Built with **Vite + TypeScript**. Content is populated from `public/Younus_CV.pdf`.
 
 ## Customize
 
-Edit **`src/content.js`** to update profile, experience, skills, projects, education, and certifications.
+Edit **`src/content.ts`** to update profile, experience, skills, projects, education, and certifications.
 
 Replace **`public/Younus_CV.pdf`** to update the downloadable CV. Hero image URL lives in `profile.heroImage`.
 

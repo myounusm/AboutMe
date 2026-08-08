@@ -8,11 +8,15 @@ import {
   education,
   certifications,
   contact,
-} from './content.js'
+} from './content.ts'
 
-const app = document.querySelector('#app')
+const app = document.querySelector<HTMLDivElement>('#app')
 
-function escapeHtml(value) {
+if (!app) {
+  throw new Error('Root element #app not found')
+}
+
+function escapeHtml(value: string | number): string {
   return String(value)
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
@@ -20,7 +24,7 @@ function escapeHtml(value) {
     .replaceAll('"', '&quot;')
 }
 
-function renderSkills() {
+function renderSkills(): string {
   return skills.groups
     .map(
       (group) => `
@@ -34,7 +38,7 @@ function renderSkills() {
     .join('')
 }
 
-function renderExperience() {
+function renderExperience(): string {
   return experience
     .map(
       (job) => `
@@ -55,7 +59,7 @@ function renderExperience() {
     .join('')
 }
 
-function renderProjects() {
+function renderProjects(): string {
   return projects
     .map((project) => {
       const inner = `
@@ -85,7 +89,7 @@ function renderProjects() {
     .join('')
 }
 
-function renderEducation() {
+function renderEducation(): string {
   return education
     .map(
       (item) => `
@@ -97,7 +101,7 @@ function renderEducation() {
     .join('')
 }
 
-function renderCertifications() {
+function renderCertifications(): string {
   return `
     <ul class="cert-list reveal">
       ${certifications.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
@@ -239,7 +243,7 @@ app.innerHTML = `
   </footer>
 `
 
-function initReveal() {
+function initReveal(): void {
   const nodes = document.querySelectorAll('.reveal')
   if (!('IntersectionObserver' in window)) {
     nodes.forEach((node) => node.classList.add('is-visible'))
@@ -261,8 +265,10 @@ function initReveal() {
   nodes.forEach((node) => observer.observe(node))
 }
 
-function initHeader() {
+function initHeader(): void {
   const header = document.querySelector('.site-header')
+  if (!header) return
+
   const onScroll = () => {
     header.classList.toggle('is-scrolled', window.scrollY > 24)
   }
@@ -270,8 +276,8 @@ function initHeader() {
   window.addEventListener('scroll', onScroll, { passive: true })
 }
 
-function initHeroParallax() {
-  const media = document.querySelector('.hero-media')
+function initHeroParallax(): void {
+  const media = document.querySelector<HTMLElement>('.hero-media')
   if (!media || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return
   }

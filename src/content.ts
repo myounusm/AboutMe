@@ -1,7 +1,73 @@
 /**
  * Portfolio content sourced from Younus_CV.pdf
  */
-export const profile = {
+
+export interface Profile {
+  name: string
+  shortName: string
+  title: string
+  headline: string
+  tagline: string
+  email: string
+  phone: string
+  location: string
+  github: string
+  linkedin: string
+  resumeUrl: string
+  heroImage: string
+  heroImageAlt: string
+}
+
+export interface About {
+  heading: string
+  lead: string
+  body: string
+}
+
+export interface ExperienceItem {
+  role: string
+  company: string
+  period: string
+  summary: string
+  highlights: string[]
+}
+
+export interface SkillGroup {
+  label: string
+  items: string[]
+}
+
+export interface Skills {
+  heading: string
+  groups: SkillGroup[]
+}
+
+export interface Project {
+  name: string
+  year: string
+  description: string
+  stack: string[]
+  link: string
+}
+
+export interface EducationItem {
+  degree: string
+  school: string
+  period: string
+}
+
+export interface Certifications {
+  heading: string
+  items: string[]
+}
+
+export interface Contact {
+  heading: string
+  body: string
+  cta: string
+}
+
+export const profile: Profile = {
   name: 'Mohammed Younus Mohiuddin',
   shortName: 'Mohammed Younus',
   title: 'Tech Lead',
@@ -19,7 +85,7 @@ export const profile = {
   heroImageAlt: 'Sunlit modern workspace with glass and soft architecture',
 }
 
-export const about = {
+export const about: About = {
   heading: 'About',
   lead:
     'Always ready to learn new technologies and adapt to evolving challenges.',
@@ -28,7 +94,7 @@ export const about = {
 Expert in enterprise solution design, digital transformation, and building scalable, high-performance systems — from architecture and integrations to mentoring teams and engaging business stakeholders.`,
 }
 
-export const experience = [
+export const experience: ExperienceItem[] = [
   {
     role: 'Tech Lead – Software Development',
     company: 'Wataniya Insurance Company, Jeddah, Saudi Arabia',
@@ -94,7 +160,7 @@ export const experience = [
   },
 ]
 
-export const skills = {
+export const skills: Skills = {
   heading: 'Skills',
   groups: [
     {
@@ -133,7 +199,7 @@ export const skills = {
   ],
 }
 
-export const projects = [
+export const projects: Project[] = [
   {
     name: 'Amazon Payfort – Digital Payment Integration',
     year: 'Wataniya',
@@ -184,7 +250,7 @@ export const projects = [
   },
 ]
 
-export const education = [
+export const education: EducationItem[] = [
   {
     degree: 'Bachelor of Computer Science (BCA)',
     school: 'Osmania University',
@@ -192,7 +258,7 @@ export const education = [
   },
 ]
 
-export const certifications = {
+export const certifications: Certifications = {
   heading: 'Certifications',
   items: [
     '12× OutSystems certified (Architecture Specialist, Professional Web/Mobile Developer, Security Specialist, Tech Lead, and more)',
@@ -202,7 +268,7 @@ export const certifications = {
   ],
 }
 
-export const contact = {
+export const contact: Contact = {
   heading: 'Let’s talk',
   body: 'Open to conversations about tech leadership, OutSystems/.NET delivery, and enterprise digital transformation.',
   cta: 'Email me',

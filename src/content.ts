@@ -75,7 +75,8 @@ export const profile: Profile = {
   headline: 'Tech Lead crafting scalable enterprise systems.',
   tagline:
     '21+ years in insurance, aviation, and software — OutSystems, .NET, cloud, and AI-driven delivery.',
-  builtWithLine: 'Built with TypeScript & Cursor AI · Deployed to Azure',
+  builtWithLine:
+    'Built with TypeScript & Cursor AI · Source on GitHub · Deployed to Azure',
   email: 'myounusmohiuddin@hotmail.com',
   phone: '+966 592889045',
   location: 'Jeddah, Saudi Arabia',

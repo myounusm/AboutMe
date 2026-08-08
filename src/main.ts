@@ -155,12 +155,16 @@ app.innerHTML = `
           ${escapeHtml(profile.headline)}
         </h1>
         <p class="hero-tagline reveal-hero" style="--d: 2">${escapeHtml(profile.tagline)}</p>
-        <div class="hero-actions reveal-hero" style="--d: 3">
+        <p class="hero-built reveal-hero" style="--d: 3">
+          <span class="hero-built-label">Built with</span>
+          ${profile.builtWith.map((tech) => `<span>${escapeHtml(tech)}</span>`).join('<span class="hero-built-sep" aria-hidden="true">·</span>')}
+        </p>
+        <div class="hero-actions reveal-hero" style="--d: 4">
           <a class="btn btn-primary" href="#work">View work</a>
           <a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>
         </div>
       </div>
-      <a class="scroll-hint reveal-hero" style="--d: 4" href="#work" aria-label="Scroll to work">
+      <a class="scroll-hint reveal-hero" style="--d: 5" href="#work" aria-label="Scroll to work">
         <span></span>
       </a>
     </section>

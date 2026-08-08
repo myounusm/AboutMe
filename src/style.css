@@ -621,23 +621,53 @@ code {
 }
 
 @media (max-width: 560px) {
+  :root {
+    --header-h: 6.5rem;
+  }
+
   .site-header {
     align-items: flex-start;
     flex-direction: column;
-    height: auto;
-    gap: 0.65rem;
-    padding-top: 0.9rem;
-    padding-bottom: 0.9rem;
+    justify-content: center;
+    height: var(--header-h);
+    gap: 0.55rem;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+
+  .brand {
+    font-size: 1.05rem;
   }
 
   .nav {
     width: 100%;
-    overflow-x: auto;
-    padding-bottom: 0.15rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.35rem;
+    font-size: 0.82rem;
+  }
+
+  .nav a {
+    text-align: center;
+    padding: 0.35rem 0.15rem;
+  }
+
+  .nav a::after {
+    display: none;
   }
 
   .hero-brand {
     max-width: none;
+    font-size: clamp(2.2rem, 11vw, 3rem);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
   }
 
   .project-row {
@@ -647,6 +677,10 @@ code {
 
   .project-arrow {
     display: none;
+  }
+
+  .contact-panel {
+    padding: 1.5rem;
   }
 }
 

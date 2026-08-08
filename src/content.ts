@@ -8,7 +8,7 @@ export interface Profile {
   title: string
   headline: string
   tagline: string
-  builtWith: string[]
+  builtWithLine: string
   email: string
   phone: string
   location: string
@@ -75,7 +75,7 @@ export const profile: Profile = {
   headline: 'Tech Lead crafting scalable enterprise systems.',
   tagline:
     '21+ years in insurance, aviation, and software — OutSystems, .NET, cloud, and AI-driven delivery.',
-  builtWith: ['TypeScript', 'Vite', 'Cursor'],
+  builtWithLine: 'Built with TypeScript & Cursor AI · Deployed to Azure',
   email: 'myounusmohiuddin@hotmail.com',
   phone: '+966 592889045',
   location: 'Jeddah, Saudi Arabia',

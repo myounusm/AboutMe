@@ -1,18 +1,19 @@
 /**
- * Edit this file to personalize your CV & portfolio.
- * Keep project links, dates, and copy accurate to your experience.
+ * Portfolio content sourced from Younus_CV.pdf
  */
 export const profile = {
   name: 'Mohammed Younus Mohiuddin',
   shortName: 'Mohammed Younus',
-  title: 'Software Engineer',
+  title: 'Tech Lead',
+  headline: 'Tech Lead crafting scalable enterprise systems.',
   tagline:
-    'I build clear, reliable software — from thoughtful interfaces to solid backend systems.',
+    '21+ years in insurance, aviation, and software — OutSystems, .NET, cloud, and AI-driven delivery.',
   email: 'myounusmohiuddin@hotmail.com',
-  location: 'Open to remote & hybrid opportunities',
+  phone: '+966 592889045',
+  location: 'Jeddah, Saudi Arabia',
   github: 'https://github.com/myounusm',
-  linkedin: '', // e.g. https://linkedin.com/in/your-handle
-  resumeUrl: '#experience',
+  linkedin: '',
+  resumeUrl: './Younus_CV.pdf',
   heroImage:
     'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80',
   heroImageAlt: 'Sunlit modern workspace with glass and soft architecture',
@@ -21,35 +22,74 @@ export const profile = {
 export const about = {
   heading: 'About',
   lead:
-    'I care about craft: readable code, calm UX, and systems that stay maintainable as they grow.',
-  body: `I'm a software engineer who enjoys turning ambiguous problems into shipping products.
-I work across the stack — shaping product flows, implementing features, and keeping quality high
-through testing, reviews, and clear communication with teammates.`,
+    'Always ready to learn new technologies and adapt to evolving challenges.',
+  body: `Tech Lead with 21+ years of software development experience across the insurance, aviation, and software industries. Holds 12 OutSystems certifications, including Professional Developer and Architecture Specialist, and is certified in Microsoft Azure AI.
+
+Expert in enterprise solution design, digital transformation, and building scalable, high-performance systems — from architecture and integrations to mentoring teams and engaging business stakeholders.`,
 }
 
 export const experience = [
   {
-    role: 'Software Engineer',
-    company: 'Your Company',
-    period: '2023 — Present',
+    role: 'Tech Lead – Software Development',
+    company: 'Wataniya Insurance Company, Jeddah, Saudi Arabia',
+    period: 'Jan 2026 — Present',
     summary:
-      'Ship product features end-to-end, improve performance, and collaborate with design and product.',
+      'Leading software delivery with a focus on scalable architecture, digital transformation, and high-performance enterprise systems.',
     highlights: [
-      'Owned features from discovery through release',
-      'Improved reliability with better testing and observability',
-      'Mentored peers through reviews and pairing',
+      'Guide architecture, delivery, and engineering practices across product initiatives',
+      'Mentor developers through code reviews and technical leadership',
+      'Drive secure, integration-heavy platforms for insurance operations',
     ],
   },
   {
-    role: 'Junior Software Engineer',
-    company: 'Previous Role',
-    period: '2021 — 2023',
+    role: 'Senior OutSystems Low-Code Developer',
+    company: 'Wataniya Insurance Company, Jeddah, Saudi Arabia',
+    period: 'Jan 2023 — Dec 2025',
     summary:
-      'Built web applications, fixed production issues, and learned how strong teams deliver.',
+      'Built and evolved mission-critical insurance platforms using OutSystems, workflows, and enterprise integrations.',
     highlights: [
-      'Delivered UI and API work on customer-facing products',
-      'Reduced bugs with clearer edge-case handling',
-      'Documented patterns that sped up onboarding',
+      'Delivered B2B and customer-facing insurance products with real-time quotation and issuance',
+      'Automated renewals, claims recovery, and partner portal operations',
+      'Integrated payment gateways, government APIs, SMS, and WhatsApp channels',
+    ],
+  },
+  {
+    role: 'Senior .NET Software Developer',
+    company: 'General Authority of Civil Aviation (GACA), Jeddah, Saudi Arabia',
+    period: 'Aug 2012 — Dec 2022',
+    summary:
+      'Developed enterprise .NET solutions supporting aviation authority systems over a decade of delivery.',
+    highlights: [
+      'Built backend solutions, APIs, and integrations across long-lived enterprise platforms',
+      'Applied SDLC ownership from design through production support',
+      'Strengthened security, performance, and maintainability of critical systems',
+    ],
+  },
+  {
+    role: 'Senior .NET Software Developer',
+    company: 'EVER TEAM, Riyadh, Saudi Arabia',
+    period: 'Nov 2007 — Aug 2012',
+    summary:
+      'Delivered .NET enterprise applications and system integrations for business clients.',
+    highlights: [
+      'Implemented service-oriented solutions and database-backed applications',
+      'Collaborated with stakeholders on requirements through release',
+    ],
+  },
+  {
+    role: 'Software Developer',
+    company: 'AFLAK Electronic Industries Co.',
+    period: 'Aug 2007 — Oct 2007',
+    summary: 'Software development for electronic industry systems.',
+    highlights: ['Contributed to application delivery and support'],
+  },
+  {
+    role: 'Software Developer',
+    company: 'AL AHLIA for Cooperative Insurance',
+    period: 'Mar 2005 — Jul 2007',
+    summary: 'Early career software development in the insurance domain.',
+    highlights: [
+      'Built foundational insurance application experience that shaped later enterprise work',
     ],
   },
 ]
@@ -58,49 +98,112 @@ export const skills = {
   heading: 'Skills',
   groups: [
     {
-      label: 'Languages',
-      items: ['JavaScript', 'TypeScript', 'Python', 'SQL'],
+      label: 'Back-end',
+      items: [
+        'ASP.NET Core (MVC)',
+        'C# / .NET',
+        'OutSystems (Low-Code)',
+        'Entity Framework',
+        'Microservices & SOA',
+        'LINQ',
+      ],
     },
     {
-      label: 'Frontend',
-      items: ['React', 'HTML/CSS', 'Vite', 'Responsive design'],
+      label: 'APIs & front-end',
+      items: [
+        'REST & SOAP APIs',
+        'JWT Authentication',
+        'Angular 14',
+        'TypeScript / JavaScript',
+        'HTML5 & Bootstrap',
+        'Ocelot / RedHat 3Scale',
+      ],
     },
     {
-      label: 'Backend & tools',
-      items: ['Node.js', 'REST APIs', 'Git', 'CI basics'],
+      label: 'Data, AI & platforms',
+      items: [
+        'Microsoft SQL Server',
+        'Oracle / PL-SQL',
+        'Azure AI Services',
+        'OCR & Computer Vision',
+        'NLP & Machine Learning',
+        'SharePoint Integration',
+      ],
     },
   ],
 }
 
 export const projects = [
   {
-    name: 'AboutMe Portfolio',
-    year: '2026',
+    name: 'Amazon Payfort – Digital Payment Integration',
+    year: 'Wataniya',
     description:
-      'A personal site for CV and selected work — fast, accessible, and easy to update.',
-    stack: ['HTML', 'CSS', 'JavaScript', 'Vite'],
-    link: 'https://github.com/myounusm/AboutMe',
+      'Secure, high-performance payment processing for direct sales — improving transaction reliability and customer experience.',
+    stack: ['Payments', 'API Integration', 'Security'],
+    link: '',
   },
   {
-    name: 'Project Two',
-    year: '2025',
+    name: 'Retail Renewal Process',
+    year: 'Insurance',
     description:
-      'Replace with a project you are proud of — what it solves, your role, and the outcome.',
-    stack: ['React', 'API', 'Design'],
-    link: '#',
+      'Automated policy renewals with smart notifications and self-service workflows to increase retention and operational efficiency.',
+    stack: ['OutSystems', 'Workflows', 'Notifications'],
+    link: '',
   },
   {
-    name: 'Project Three',
-    year: '2024',
+    name: 'Domestic Labor Insurance Platform',
+    year: 'B2B',
     description:
-      'Another highlight: a side project, open-source contribution, or academic build.',
-    stack: ['TypeScript', 'Node'],
-    link: '#',
+      'Mission-critical B2B platform for real-time quotation, policy issuance, and activation for external partners.',
+    stack: ['OutSystems', 'B2B', 'Insurance'],
+    link: '',
+  },
+  {
+    name: 'Claims Recovery Automation',
+    year: 'Insurance',
+    description:
+      'Workflow-driven claim recovery automation that reduced manual effort and accelerated financial recovery cycles.',
+    stack: ['BPT Workflows', 'Automation'],
+    link: '',
+  },
+  {
+    name: 'Partners Portal Platform',
+    year: 'Insurance',
+    description:
+      'Centralized broker portal for motors, marine, property, and more — integrated with core insurance systems.',
+    stack: ['Portal', 'Core Integration'],
+    link: '',
+  },
+  {
+    name: 'ELM & Messaging Integrations',
+    year: 'Enterprise',
+    description:
+      'Government ELM APIs for verified personal and vehicle data, plus SMS and WhatsApp automation for real-time engagement.',
+    stack: ['ELM', 'SMS', 'WhatsApp'],
+    link: '',
   },
 ]
 
+export const education = [
+  {
+    degree: 'Bachelor of Computer Science (BCA)',
+    school: 'Osmania University',
+    period: 'Mar 2003',
+  },
+]
+
+export const certifications = {
+  heading: 'Certifications',
+  items: [
+    '12× OutSystems certified (Architecture Specialist, Professional Web/Mobile Developer, Security Specialist, Tech Lead, and more)',
+    'Microsoft Certified: Azure AI Fundamentals',
+    'Microsoft 365 Certified: Fundamentals',
+    'SCRUM Fundamentals',
+  ],
+}
+
 export const contact = {
   heading: 'Let’s talk',
-  body: 'Have a role, collaboration, or idea in mind? I’d love to hear from you.',
+  body: 'Open to conversations about tech leadership, OutSystems/.NET delivery, and enterprise digital transformation.',
   cta: 'Email me',
 }

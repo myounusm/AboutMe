@@ -5,6 +5,8 @@ import {
   experience,
   skills,
   projects,
+  education,
+  certifications,
   contact,
 } from './content.js'
 
@@ -55,13 +57,8 @@ function renderExperience() {
 
 function renderProjects() {
   return projects
-    .map(
-      (project) => `
-      <a
-        class="project-row reveal"
-        href="${escapeHtml(project.link)}"
-        ${project.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}
-      >
+    .map((project) => {
+      const inner = `
         <div class="project-main">
           <div class="project-title-row">
             <h3>${escapeHtml(project.name)}</h3>
@@ -69,11 +66,42 @@ function renderProjects() {
           </div>
           <p>${escapeHtml(project.description)}</p>
           <p class="project-stack">${project.stack.map(escapeHtml).join(' · ')}</p>
-        </div>
+        </div>`
+
+      if (project.link) {
+        return `
+      <a
+        class="project-row reveal"
+        href="${escapeHtml(project.link)}"
+        ${project.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}
+      >
+        ${inner}
         <span class="project-arrow" aria-hidden="true">→</span>
-      </a>`,
+      </a>`
+      }
+
+      return `<article class="project-row project-row-static reveal">${inner}</article>`
+    })
+    .join('')
+}
+
+function renderEducation() {
+  return education
+    .map(
+      (item) => `
+      <article class="edu-item reveal">
+        <h3>${escapeHtml(item.degree)}</h3>
+        <p>${escapeHtml(item.school)} · ${escapeHtml(item.period)}</p>
+      </article>`,
     )
     .join('')
+}
+
+function renderCertifications() {
+  return `
+    <ul class="cert-list reveal">
+      ${certifications.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+    </ul>`
 }
 
 const socialLinks = [
@@ -83,7 +111,13 @@ const socialLinks = [
   profile.linkedin
     ? `<a href="${escapeHtml(profile.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn</a>`
     : '',
+  profile.phone
+    ? `<a href="tel:${escapeHtml(profile.phone.replace(/\s+/g, ''))}">Call</a>`
+    : '',
   `<a href="mailto:${escapeHtml(profile.email)}">Email</a>`,
+  profile.resumeUrl
+    ? `<a href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>`
+    : '',
 ]
   .filter(Boolean)
   .join('')
@@ -114,12 +148,12 @@ app.innerHTML = `
       <div class="hero-content">
         <p class="hero-brand reveal-hero" style="--d: 0">${escapeHtml(profile.name)}</p>
         <h1 class="hero-title reveal-hero" style="--d: 1">
-          ${escapeHtml(profile.title)} crafting dependable products.
+          ${escapeHtml(profile.headline)}
         </h1>
         <p class="hero-tagline reveal-hero" style="--d: 2">${escapeHtml(profile.tagline)}</p>
         <div class="hero-actions reveal-hero" style="--d: 3">
           <a class="btn btn-primary" href="#work">View work</a>
-          <a class="btn btn-ghost" href="mailto:${escapeHtml(profile.email)}">Get in touch</a>
+          <a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>
         </div>
       </div>
       <a class="scroll-hint reveal-hero" style="--d: 4" href="#work" aria-label="Scroll to work">
@@ -130,7 +164,7 @@ app.innerHTML = `
     <section id="work" class="section section-work">
       <div class="section-head reveal">
         <h2>Selected work</h2>
-        <p>A few projects that show how I think and build.</p>
+        <p>Recent platforms and integrations delivered in the insurance domain.</p>
       </div>
       <div class="project-list">
         ${renderProjects()}
@@ -140,7 +174,7 @@ app.innerHTML = `
     <section id="experience" class="section section-experience">
       <div class="section-head reveal">
         <h2>Experience</h2>
-        <p>Where I’ve built, shipped, and grown.</p>
+        <p>21+ years across insurance, aviation, and enterprise software.</p>
       </div>
       <div class="timeline">
         ${renderExperience()}
@@ -150,10 +184,29 @@ app.innerHTML = `
     <section id="skills" class="section section-skills">
       <div class="section-head reveal">
         <h2>${escapeHtml(skills.heading)}</h2>
-        <p>Tools I reach for most often.</p>
+        <p>Low-code, .NET, integrations, data, and Azure AI.</p>
       </div>
       <div class="skills-grid">
         ${renderSkills()}
+      </div>
+    </section>
+
+    <section id="credentials" class="section section-credentials">
+      <div class="credentials-layout">
+        <div>
+          <div class="section-head reveal">
+            <h2>Education</h2>
+          </div>
+          <div class="edu-list">
+            ${renderEducation()}
+          </div>
+        </div>
+        <div>
+          <div class="section-head reveal">
+            <h2>${escapeHtml(certifications.heading)}</h2>
+          </div>
+          ${renderCertifications()}
+        </div>
       </div>
     </section>
 
@@ -171,7 +224,7 @@ app.innerHTML = `
       <div class="contact-panel reveal">
         <h2>${escapeHtml(contact.heading)}</h2>
         <p>${escapeHtml(contact.body)}</p>
-        <p class="contact-meta">${escapeHtml(profile.location)}</p>
+        <p class="contact-meta">${escapeHtml(profile.location)} · ${escapeHtml(profile.phone)}</p>
         <div class="contact-actions">
           <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">${escapeHtml(contact.cta)}</a>
           <div class="socials">${socialLinks}</div>

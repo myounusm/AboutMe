@@ -333,6 +333,16 @@ code {
   padding-right: 0.75rem;
 }
 
+.project-row-static {
+  cursor: default;
+}
+
+.project-row-static:hover {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  background: transparent;
+}
+
 .project-title-row {
   display: flex;
   flex-wrap: wrap;
@@ -453,6 +463,34 @@ code {
   padding-bottom: 0.55rem;
   border-bottom: 1px solid var(--line);
   font-weight: 500;
+}
+
+.credentials-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.edu-item h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+.edu-item p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
+.cert-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--ink-soft);
+  display: grid;
+  gap: 0.65rem;
 }
 
 .about-layout {
@@ -606,6 +644,7 @@ code {
 @media (max-width: 860px) {
   .skills-grid,
   .about-layout,
+  .credentials-layout,
   .timeline-item {
     grid-template-columns: 1fr;
   }

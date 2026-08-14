@@ -159,18 +159,30 @@ code {
 }
 
 .nav a:hover,
-.nav a:focus-visible {
+.nav a:focus-visible,
+.nav a.is-active {
   color: var(--ink);
 }
 
 .nav a:hover .nav-icon,
-.nav a:focus-visible .nav-icon {
+.nav a:focus-visible .nav-icon,
+.nav a.is-active .nav-icon {
   color: var(--sea);
 }
 
 .nav a:hover::after,
-.nav a:focus-visible::after {
+.nav a:focus-visible::after,
+.nav a.is-active::after {
   transform: scaleX(1);
+}
+
+.nav a.is-active {
+  font-weight: 700;
+}
+
+.nav a.is-active::after {
+  height: 2px;
+  background: var(--sea-deep);
 }
 
 .hero {

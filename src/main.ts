@@ -487,6 +487,72 @@ function initExperienceTabs(): void {
   activate(0)
 }
 
+function initActiveNav(): void {
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'))
+  if (!links.length) return
+
+  const sections = links
+    .map((link) => {
+      const id = link.getAttribute('href')?.slice(1)
+      if (!id) return null
+      const section = document.getElementById(id)
+      return section ? { link, section } : null
+    })
+    .filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } => Boolean(item))
+
+  const setActive = (activeLink: HTMLAnchorElement | null) => {
+    links.forEach((link) => {
+      const selected = link === activeLink
+      link.classList.toggle('is-active', selected)
+      if (selected) {
+        link.setAttribute('aria-current', 'true')
+      } else {
+        link.removeAttribute('aria-current')
+      }
+    })
+  }
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => setActive(link))
+  })
+
+  if (!('IntersectionObserver' in window) || !sections.length) {
+    return
+  }
+
+  const visible = new Map<Element, number>()
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visible.set(entry.target, entry.intersectionRatio)
+        } else {
+          visible.delete(entry.target)
+        }
+      })
+
+      let best: { link: HTMLAnchorElement; ratio: number } | null = null
+      sections.forEach(({ link, section }) => {
+        const ratio = visible.get(section) ?? 0
+        if (!best || ratio > best.ratio) {
+          best = { link, ratio }
+        }
+      })
+
+      if (best && best.ratio > 0) {
+        setActive(best.link)
+      }
+    },
+    {
+      rootMargin: '-28% 0px -55% 0px',
+      threshold: [0.1, 0.25, 0.5, 0.75],
+    },
+  )
+
+  sections.forEach(({ section }) => observer.observe(section))
+}
+
 requestAnimationFrame(() => {
   document.body.classList.add('is-ready')
   initReveal()
@@ -494,4 +560,5 @@ requestAnimationFrame(() => {
   initHeroParallax()
   initFlashCards()
   initExperienceTabs()
+  initActiveNav()
 })

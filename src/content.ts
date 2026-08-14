@@ -116,7 +116,7 @@ export const experience: ExperienceItem[] = [
       'Mentor developers through code reviews and technical leadership',
       'Drive secure, integration-heavy platforms for insurance operations',
     ],
-    logo: './logos/wataniya.svg',
+    logo: './logos/wataniya.png',
     logoAlt: 'Wataniya Insurance logo',
   },
   {
@@ -130,7 +130,7 @@ export const experience: ExperienceItem[] = [
       'Automated renewals, claims recovery, and partner portal operations',
       'Integrated payment gateways, government APIs, SMS, and WhatsApp channels',
     ],
-    logo: './logos/wataniya.svg',
+    logo: './logos/wataniya.png',
     logoAlt: 'Wataniya Insurance logo',
   },
   {

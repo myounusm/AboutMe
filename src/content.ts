@@ -144,8 +144,8 @@ export const experience: ExperienceItem[] = [
       'Applied SDLC ownership from design through production support',
       'Strengthened security, performance, and maintainability of critical systems',
     ],
-    logo: './logos/gaca.svg',
-    logoAlt: 'GACA logo',
+    logo: './logos/gaca.png',
+    logoAlt: 'General Authority of Civil Aviation (GACA) logo',
   },
   {
     role: 'Senior .NET Software Developer',

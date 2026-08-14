@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="GACA">
-  <rect width="64" height="64" rx="14" fill="#14323F"/>
-  <path d="M12 38c8-14 32-14 40 0" fill="none" stroke="#E8F0EE" stroke-width="3.2" stroke-linecap="round"/>
-  <path d="M18 34l14-10 14 10" fill="none" stroke="#B08D57" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="32" cy="42" r="3" fill="#1A6B63"/>
-  <text x="32" y="54" text-anchor="middle" font-family="Georgia, serif" font-size="8" font-weight="700" fill="#E8F0EE">GACA</text>
-</svg>

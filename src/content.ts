@@ -84,7 +84,7 @@ export const profile: Profile = {
   location: 'Jeddah, Saudi Arabia',
   github: 'https://github.com/myounusm',
   linkedin: 'https://www.linkedin.com/in/myounusm/',
-  photoUrl: './profile.png',
+  photoUrl: './profile.jpg',
   photoAlt: 'Portrait of Mohammed Younus Mohiuddin',
   resumeUrl: './Younus_CV.pdf',
   heroImage:

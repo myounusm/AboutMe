@@ -418,11 +418,14 @@ function initFlashCards(): void {
     const toggle = card.querySelector<HTMLElement>('[data-flash-toggle]')
     if (!toggle) return
 
-    toggle.addEventListener('click', (event) => {
+    const flipFromEvent = (event: Event) => {
       const target = event.target as HTMLElement | null
       if (target?.closest('.flash-link')) return
       setFlipped(card, !card.classList.contains('is-flipped'))
-    })
+    }
+
+    // Whole card surface is clickable (faces + empty padding).
+    card.addEventListener('click', flipFromEvent)
 
     toggle.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {

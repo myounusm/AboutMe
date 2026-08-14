@@ -10,6 +10,7 @@ import {
   contact,
 } from './content.ts'
 import { iconForSkill } from './skill-icons.ts'
+import { sectionIcon, type SectionIconId } from './section-icons.ts'
 
 const app = document.querySelector<HTMLDivElement>('#app')
 
@@ -23,6 +24,14 @@ function escapeHtml(value: string | number): string {
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
+}
+
+function renderSectionHeading(iconId: SectionIconId, title: string): string {
+  return `
+    <div class="section-title">
+      <span class="section-icon" aria-hidden="true">${sectionIcon(iconId)}</span>
+      <h2>${escapeHtml(title)}</h2>
+    </div>`
 }
 
 function renderSkills(): string {
@@ -244,7 +253,7 @@ app.innerHTML = `
 
     <section id="work" class="section section-work">
       <div class="section-head reveal">
-        <h2>Selected work</h2>
+        ${renderSectionHeading('work', 'Selected work')}
         <p>Recent platforms and integrations delivered in the insurance domain. Flip a card for details.</p>
       </div>
       <div class="flash-grid" role="list">
@@ -254,7 +263,7 @@ app.innerHTML = `
 
     <section id="experience" class="section section-experience">
       <div class="section-head reveal">
-        <h2>Experience</h2>
+        ${renderSectionHeading('experience', 'Experience')}
         <p>21+ years across insurance, aviation, and enterprise software.</p>
       </div>
       <div class="timeline">
@@ -264,7 +273,7 @@ app.innerHTML = `
 
     <section id="skills" class="section section-skills">
       <div class="section-head reveal">
-        <h2>${escapeHtml(skills.heading)}</h2>
+        ${renderSectionHeading('skills', skills.heading)}
         <p>${escapeHtml(skills.lead)}</p>
       </div>
       <div class="skills-grid">
@@ -274,7 +283,7 @@ app.innerHTML = `
 
     <section id="education" class="section section-education">
       <div class="section-head reveal">
-        <h2>Education</h2>
+        ${renderSectionHeading('education', 'Education')}
         <p>Academic foundation in computer science.</p>
       </div>
       <div class="edu-list">
@@ -284,7 +293,7 @@ app.innerHTML = `
 
     <section id="certifications" class="section section-certifications">
       <div class="section-head reveal">
-        <h2>${escapeHtml(certifications.heading)}</h2>
+        ${renderSectionHeading('certifications', certifications.heading)}
         <p>Professional credentials across OutSystems, Microsoft, and agile delivery.</p>
       </div>
       ${renderCertifications()}
@@ -293,7 +302,7 @@ app.innerHTML = `
     <section id="about" class="section section-about">
       <div class="about-layout">
         <div class="section-head reveal">
-          <h2>${escapeHtml(about.heading)}</h2>
+          ${renderSectionHeading('about', about.heading)}
           <p class="about-lead">${escapeHtml(about.lead)}</p>
         </div>
         <p class="about-body reveal">${escapeHtml(about.body)}</p>
@@ -313,7 +322,7 @@ app.innerHTML = `
             />
           </div>
           <div class="contact-copy">
-            <h2>${escapeHtml(contact.heading)}</h2>
+            ${renderSectionHeading('contact', contact.heading)}
             <p>${escapeHtml(contact.body)}</p>
             <p class="contact-meta">${escapeHtml(profile.location)} · ${escapeHtml(profile.phone)}</p>
             <div class="contact-actions">

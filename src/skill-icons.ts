@@ -60,6 +60,9 @@ export const skillIcons: Record<string, string> = {
   'SharePoint Integration': svg(
     `<rect ${stroke} x="3" y="3" width="8" height="8" rx="1"/><rect ${stroke} x="13" y="3" width="8" height="8" rx="1"/><rect ${stroke} x="3" y="13" width="8" height="8" rx="1"/><rect ${stroke} x="13" y="13" width="8" height="8" rx="1"/>`,
   ),
+  'Cursor AI': svg(
+    `<path ${stroke} d="M5 19L12 4l7 15"/><path ${stroke} d="M8.2 13h7.6"/><circle ${stroke} cx="12" cy="19" r="1.4"/>`,
+  ),
 }
 
 export function iconForSkill(name: string): string {

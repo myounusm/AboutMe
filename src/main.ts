@@ -48,24 +48,39 @@ function renderSkills(): string {
 }
 
 function renderExperience(): string {
-  return experience
-    .map(
-      (job) => `
-      <article class="timeline-item reveal">
-        <div class="timeline-meta">
-          <p class="timeline-period">${escapeHtml(job.period)}</p>
+  // Oldest → newest for left-to-right career progression
+  const items = [...experience].reverse()
+
+  return `
+    <div class="timeline-wrap reveal">
+      <div class="timeline-scroll" tabindex="0" aria-label="Career timeline">
+        <div class="timeline-track" aria-hidden="true">
+          <div class="timeline-progress"></div>
         </div>
-        <div class="timeline-body">
-          <h3>${escapeHtml(job.role)}</h3>
-          <p class="timeline-company">${escapeHtml(job.company)}</p>
-          <p class="timeline-summary">${escapeHtml(job.summary)}</p>
-          <ul>
-            ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
-          </ul>
-        </div>
-      </article>`,
-    )
-    .join('')
+        <ol class="timeline">
+          ${items
+            .map(
+              (job, index) => `
+            <li class="timeline-item" style="--i: ${index}">
+              <div class="timeline-node" aria-hidden="true">
+                <span class="timeline-dot"></span>
+              </div>
+              <article class="timeline-card">
+                <p class="timeline-period">${escapeHtml(job.period)}</p>
+                <h3>${escapeHtml(job.role)}</h3>
+                <p class="timeline-company">${escapeHtml(job.company)}</p>
+                <p class="timeline-summary">${escapeHtml(job.summary)}</p>
+                <ul>
+                  ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
+                </ul>
+              </article>
+            </li>`,
+            )
+            .join('')}
+        </ol>
+      </div>
+      <p class="timeline-hint">Scroll sideways to explore the full career path →</p>
+    </div>`
 }
 
 function renderProjects(): string {
@@ -201,7 +216,7 @@ app.innerHTML = `
     <section id="skills" class="section section-skills">
       <div class="section-head reveal">
         <h2>${escapeHtml(skills.heading)}</h2>
-        <p>Low-code, .NET, integrations, data, and Azure AI.</p>
+        <p>${escapeHtml(skills.lead)}</p>
       </div>
       <div class="skills-grid">
         ${renderSkills()}
@@ -323,9 +338,56 @@ function initHeroParallax(): void {
   )
 }
 
+function initTimeline(): void {
+  const wrap = document.querySelector<HTMLElement>('.timeline-wrap')
+  const scroller = document.querySelector<HTMLElement>('.timeline-scroll')
+  const progress = document.querySelector<HTMLElement>('.timeline-progress')
+  if (!wrap || !scroller || !progress) return
+
+  const updateProgress = () => {
+    const max = scroller.scrollWidth - scroller.clientWidth
+    const ratio = max > 0 ? scroller.scrollLeft / max : 1
+    progress.style.transform = `scaleX(${Math.max(0.08, ratio)})`
+  }
+
+  scroller.addEventListener('scroll', updateProgress, { passive: true })
+  updateProgress()
+
+  // Convert vertical wheel to horizontal scroll when over the timeline
+  scroller.addEventListener(
+    'wheel',
+    (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return
+      if (scroller.scrollWidth <= scroller.clientWidth) return
+      event.preventDefault()
+      scroller.scrollLeft += event.deltaY
+    },
+    { passive: false },
+  )
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    wrap.classList.add('is-animated')
+    return
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          wrap.classList.add('is-animated')
+          observer.unobserve(wrap)
+        }
+      })
+    },
+    { threshold: 0.25 },
+  )
+  observer.observe(wrap)
+}
+
 requestAnimationFrame(() => {
   document.body.classList.add('is-ready')
   initReveal()
   initHeader()
   initHeroParallax()
+  initTimeline()
 })

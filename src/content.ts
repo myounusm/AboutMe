@@ -42,6 +42,7 @@ export interface SkillGroup {
 
 export interface Skills {
   heading: string
+  lead: string
   groups: SkillGroup[]
 }
 
@@ -169,6 +170,7 @@ export const experience: ExperienceItem[] = [
 
 export const skills: Skills = {
   heading: 'Skills',
+  lead: 'Cursor AI, OutSystems Low-code, .NET, integrations, data, and Azure AI.',
   groups: [
     {
       label: 'Back-end',
@@ -195,6 +197,7 @@ export const skills: Skills = {
     {
       label: 'Data, AI & platforms',
       items: [
+        'Cursor AI',
         'Microsoft SQL Server',
         'Oracle / PL-SQL',
         'Azure AI Services',

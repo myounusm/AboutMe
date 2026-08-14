@@ -136,6 +136,7 @@ app.innerHTML = `
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -197,23 +198,22 @@ app.innerHTML = `
       </div>
     </section>
 
-    <section id="education" class="section section-credentials">
-      <div class="credentials-layout">
-        <div>
-          <div class="section-head reveal">
-            <h2>Education</h2>
-          </div>
-          <div class="edu-list">
-            ${renderEducation()}
-          </div>
-        </div>
-        <div>
-          <div class="section-head reveal">
-            <h2>${escapeHtml(certifications.heading)}</h2>
-          </div>
-          ${renderCertifications()}
-        </div>
+    <section id="education" class="section section-education">
+      <div class="section-head reveal">
+        <h2>Education</h2>
+        <p>Academic foundation in computer science.</p>
       </div>
+      <div class="edu-list">
+        ${renderEducation()}
+      </div>
+    </section>
+
+    <section id="certifications" class="section section-certifications">
+      <div class="section-head reveal">
+        <h2>${escapeHtml(certifications.heading)}</h2>
+        <p>Professional credentials across OutSystems, Microsoft, and agile delivery.</p>
+      </div>
+      ${renderCertifications()}
     </section>
 
     <section id="about" class="section section-about">

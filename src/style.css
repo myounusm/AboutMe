@@ -420,7 +420,12 @@ code {
   right: max(1.25rem, calc((100% - var(--max)) / 2));
 }
 
+.timeline-wrap {
+  position: relative;
+}
+
 .timeline-scroll {
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 1.25rem 0.25rem 1.5rem;

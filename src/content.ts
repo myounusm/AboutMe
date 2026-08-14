@@ -166,8 +166,8 @@ export const experience: ExperienceItem[] = [
     period: 'Aug 2007 — Oct 2007',
     summary: 'Software development for electronic industry systems.',
     highlights: ['Contributed to application delivery and support'],
-    logo: './logos/aflak.svg',
-    logoAlt: 'AFLAK logo',
+    logo: './logos/aflak.png',
+    logoAlt: 'Aflak Electronics Industries Company logo',
   },
   {
     role: 'Software Developer',

@@ -118,30 +118,46 @@ function renderExperience(): string {
 
 function renderProjects(): string {
   return projects
-    .map((project) => {
-      const inner = `
-        <div class="project-main">
-          <div class="project-title-row">
-            <h3>${escapeHtml(project.name)}</h3>
-            <span class="project-year">${escapeHtml(project.year)}</span>
-          </div>
-          <p>${escapeHtml(project.description)}</p>
-          <p class="project-stack">${project.stack.map(escapeHtml).join(' · ')}</p>
-        </div>`
+    .map((project, index) => {
+      const stackTags = project.stack
+        .map((item) => `<li>${escapeHtml(item)}</li>`)
+        .join('')
+      const linkHtml = project.link
+        ? `<a
+            class="flash-link"
+            href="${escapeHtml(project.link)}"
+            ${project.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}
+          >Open project</a>`
+        : ''
 
-      if (project.link) {
-        return `
-      <a
-        class="project-row reveal"
-        href="${escapeHtml(project.link)}"
-        ${project.link.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}
+      return `
+      <article
+        class="flash-card reveal"
+        style="--i: ${index}"
+        role="listitem"
+        data-flash-card
       >
-        ${inner}
-        <span class="project-arrow" aria-hidden="true">→</span>
-      </a>`
-      }
-
-      return `<article class="project-row project-row-static reveal">${inner}</article>`
+        <div
+          class="flash-inner"
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+          aria-label="Flip card: ${escapeHtml(project.name)}"
+          data-flash-toggle
+        >
+          <div class="flash-face flash-front" aria-hidden="false">
+            <span class="flash-year">${escapeHtml(project.year)}</span>
+            <h3>${escapeHtml(project.name)}</h3>
+            <span class="flash-hint" aria-hidden="true">Tap to flip</span>
+          </div>
+          <div class="flash-face flash-back" aria-hidden="true">
+            <p class="flash-desc">${escapeHtml(project.description)}</p>
+            <ul class="flash-stack">${stackTags}</ul>
+            ${linkHtml}
+            <span class="flash-hint" aria-hidden="true">Tap to flip back</span>
+          </div>
+        </div>
+      </article>`
     })
     .join('')
 }
@@ -229,9 +245,9 @@ app.innerHTML = `
     <section id="work" class="section section-work">
       <div class="section-head reveal">
         <h2>Selected work</h2>
-        <p>Recent platforms and integrations delivered in the insurance domain.</p>
+        <p>Recent platforms and integrations delivered in the insurance domain. Flip a card for details.</p>
       </div>
-      <div class="project-list">
+      <div class="flash-grid" role="list">
         ${renderProjects()}
       </div>
     </section>
@@ -371,6 +387,42 @@ function initHeroParallax(): void {
   )
 }
 
+function initFlashCards(): void {
+  const cards = document.querySelectorAll<HTMLElement>('[data-flash-card]')
+  if (!cards.length) return
+
+  const setFlipped = (card: HTMLElement, flipped: boolean) => {
+    card.classList.toggle('is-flipped', flipped)
+    const toggle = card.querySelector<HTMLElement>('[data-flash-toggle]')
+    const front = card.querySelector<HTMLElement>('.flash-front')
+    const back = card.querySelector<HTMLElement>('.flash-back')
+    toggle?.setAttribute('aria-expanded', flipped ? 'true' : 'false')
+    front?.setAttribute('aria-hidden', flipped ? 'true' : 'false')
+    back?.setAttribute('aria-hidden', flipped ? 'false' : 'true')
+  }
+
+  cards.forEach((card) => {
+    const toggle = card.querySelector<HTMLElement>('[data-flash-toggle]')
+    if (!toggle) return
+
+    toggle.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement | null
+      if (target?.closest('.flash-link')) return
+      setFlipped(card, !card.classList.contains('is-flipped'))
+    })
+
+    toggle.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        setFlipped(card, !card.classList.contains('is-flipped'))
+      } else if (event.key === 'Escape' && card.classList.contains('is-flipped')) {
+        event.preventDefault()
+        setFlipped(card, false)
+      }
+    })
+  })
+}
+
 function initExperienceTabs(): void {
   const root = document.querySelector<HTMLElement>('.exp-tabs')
   if (!root) return
@@ -427,5 +479,6 @@ requestAnimationFrame(() => {
   initReveal()
   initHeader()
   initHeroParallax()
+  initFlashCards()
   initExperienceTabs()
 })

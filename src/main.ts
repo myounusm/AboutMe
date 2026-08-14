@@ -48,12 +48,20 @@ function renderSkills(): string {
 }
 
 function renderExperience(): string {
-  // Oldest → newest for left-to-right career progression
-  const items = [...experience].reverse()
+  // Newest → oldest (left to right)
+  const items = experience
 
   return `
     <div class="timeline-wrap reveal">
-      <div class="timeline-scroll" tabindex="0" aria-label="Career timeline">
+      <div class="timeline-controls">
+        <button type="button" class="timeline-nav timeline-nav-prev" aria-label="Scroll timeline left">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button type="button" class="timeline-nav timeline-nav-next" aria-label="Scroll timeline right">
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+      <div class="timeline-scroll" tabindex="0" aria-label="Career timeline, newest to oldest">
         <div class="timeline-track" aria-hidden="true">
           <div class="timeline-progress"></div>
         </div>
@@ -79,7 +87,7 @@ function renderExperience(): string {
             .join('')}
         </ol>
       </div>
-      <p class="timeline-hint">Scroll sideways to explore the full career path →</p>
+      <p class="timeline-hint">Use the arrows to move through your career path</p>
     </div>`
 }
 
@@ -342,18 +350,49 @@ function initTimeline(): void {
   const wrap = document.querySelector<HTMLElement>('.timeline-wrap')
   const scroller = document.querySelector<HTMLElement>('.timeline-scroll')
   const progress = document.querySelector<HTMLElement>('.timeline-progress')
+  const prevBtn = document.querySelector<HTMLButtonElement>('.timeline-nav-prev')
+  const nextBtn = document.querySelector<HTMLButtonElement>('.timeline-nav-next')
   if (!wrap || !scroller || !progress) return
 
-  const updateProgress = () => {
+  const getStep = () => {
+    const card = scroller.querySelector<HTMLElement>('.timeline-item')
+    const list = scroller.querySelector<HTMLElement>('.timeline')
+    if (!card) return Math.max(280, scroller.clientWidth * 0.8)
+    let gap = 20
+    if (list) {
+      const styles = window.getComputedStyle(list)
+      gap = Number.parseFloat(styles.columnGap || styles.gap || '20') || 20
+    }
+    return card.getBoundingClientRect().width + gap
+  }
+
+  const updateControls = () => {
     const max = scroller.scrollWidth - scroller.clientWidth
     const ratio = max > 0 ? scroller.scrollLeft / max : 1
     progress.style.transform = `scaleX(${Math.max(0.08, ratio)})`
+
+    const atStart = scroller.scrollLeft <= 4
+    const atEnd = scroller.scrollLeft >= max - 4
+    prevBtn?.toggleAttribute('disabled', atStart || max <= 0)
+    nextBtn?.toggleAttribute('disabled', atEnd || max <= 0)
+    wrap.classList.toggle('is-scrollable', max > 4)
   }
 
-  scroller.addEventListener('scroll', updateProgress, { passive: true })
-  updateProgress()
+  const scrollByDir = (dir: -1 | 1) => {
+    scroller.scrollBy({
+      left: dir * getStep(),
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'auto'
+        : 'smooth',
+    })
+  }
 
-  // Convert vertical wheel to horizontal scroll when over the timeline
+  prevBtn?.addEventListener('click', () => scrollByDir(-1))
+  nextBtn?.addEventListener('click', () => scrollByDir(1))
+  scroller.addEventListener('scroll', updateControls, { passive: true })
+  window.addEventListener('resize', updateControls)
+  updateControls()
+
   scroller.addEventListener(
     'wheel',
     (event) => {

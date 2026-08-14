@@ -424,6 +424,51 @@ code {
   position: relative;
 }
 
+.timeline-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  width: min(100% - 2.5rem, var(--max));
+  margin: 0 auto 0.85rem;
+}
+
+.timeline-nav {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--sea-deep);
+  font-size: 1.55rem;
+  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.timeline-nav:hover:not(:disabled) {
+  background: var(--sea);
+  border-color: var(--sea);
+  color: #f4f7f6;
+  transform: translateY(-1px);
+}
+
+.timeline-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.timeline-nav:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
 .timeline-scroll {
   position: relative;
   overflow-x: auto;
@@ -872,6 +917,12 @@ code {
     margin-inline: auto;
   }
 
+  .timeline-controls {
+    width: min(100% - 1.5rem, var(--max));
+    margin-inline: auto;
+    margin-bottom: 0.75rem;
+  }
+
   .timeline-scroll {
     padding-inline: max(0.75rem, calc((100vw - min(100vw - 1.5rem, var(--max))) / 2));
   }
@@ -984,6 +1035,12 @@ code {
 
   .project-arrow {
     display: none;
+  }
+
+  .timeline-controls {
+    width: min(100% - 1.25rem, var(--max));
+    margin-inline: auto;
+    justify-content: center;
   }
 
   .timeline {

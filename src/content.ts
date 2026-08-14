@@ -177,8 +177,8 @@ export const experience: ExperienceItem[] = [
     highlights: [
       'Built foundational insurance application experience that shaped later enterprise work',
     ],
-    logo: './logos/alahlia.svg',
-    logoAlt: 'AL AHLIA logo',
+    logo: './logos/alahlia.png',
+    logoAlt: 'AL AHLIA for cooperative insurance logo',
   },
 ]
 

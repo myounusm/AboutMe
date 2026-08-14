@@ -67,9 +67,14 @@ function renderExperience(): string {
             aria-controls="exp-panel-${index}"
             data-exp-index="${index}"
           >
-            <span class="exp-tab-period">${escapeHtml(job.period)}</span>
-            <span class="exp-tab-role">${escapeHtml(job.role)}</span>
-            <span class="exp-tab-company">${escapeHtml(shortCompany(job.company))}</span>
+            <span class="exp-tab-logo" aria-hidden="true">
+              <img src="${escapeHtml(job.logo)}" alt="" width="40" height="40" loading="lazy" />
+            </span>
+            <span class="exp-tab-copy">
+              <span class="exp-tab-period">${escapeHtml(job.period)}</span>
+              <span class="exp-tab-role">${escapeHtml(job.role)}</span>
+              <span class="exp-tab-company">${escapeHtml(shortCompany(job.company))}</span>
+            </span>
           </button>`,
           )
           .join('')}
@@ -85,9 +90,21 @@ function renderExperience(): string {
             aria-labelledby="exp-tab-${index}"
             ${index === 0 ? '' : 'hidden'}
           >
-            <p class="exp-panel-period">${escapeHtml(job.period)}</p>
-            <h3>${escapeHtml(job.role)}</h3>
-            <p class="exp-panel-company">${escapeHtml(job.company)}</p>
+            <div class="exp-panel-head">
+              <img
+                class="exp-panel-logo"
+                src="${escapeHtml(job.logo)}"
+                alt="${escapeHtml(job.logoAlt)}"
+                width="56"
+                height="56"
+                loading="lazy"
+              />
+              <div>
+                <p class="exp-panel-period">${escapeHtml(job.period)}</p>
+                <h3>${escapeHtml(job.role)}</h3>
+                <p class="exp-panel-company">${escapeHtml(job.company)}</p>
+              </div>
+            </div>
             <p class="exp-panel-summary">${escapeHtml(job.summary)}</p>
             <ul>
               ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}

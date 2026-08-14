@@ -33,6 +33,8 @@ export interface ExperienceItem {
   period: string
   summary: string
   highlights: string[]
+  logo: string
+  logoAlt: string
 }
 
 export interface SkillGroup {
@@ -114,6 +116,8 @@ export const experience: ExperienceItem[] = [
       'Mentor developers through code reviews and technical leadership',
       'Drive secure, integration-heavy platforms for insurance operations',
     ],
+    logo: './logos/wataniya.svg',
+    logoAlt: 'Wataniya Insurance logo',
   },
   {
     role: 'Senior OutSystems Low-Code Developer',
@@ -126,6 +130,8 @@ export const experience: ExperienceItem[] = [
       'Automated renewals, claims recovery, and partner portal operations',
       'Integrated payment gateways, government APIs, SMS, and WhatsApp channels',
     ],
+    logo: './logos/wataniya.svg',
+    logoAlt: 'Wataniya Insurance logo',
   },
   {
     role: 'Senior .NET Software Developer',
@@ -138,6 +144,8 @@ export const experience: ExperienceItem[] = [
       'Applied SDLC ownership from design through production support',
       'Strengthened security, performance, and maintainability of critical systems',
     ],
+    logo: './logos/gaca.svg',
+    logoAlt: 'GACA logo',
   },
   {
     role: 'Senior .NET Software Developer',
@@ -149,6 +157,8 @@ export const experience: ExperienceItem[] = [
       'Implemented service-oriented solutions and database-backed applications',
       'Collaborated with stakeholders on requirements through release',
     ],
+    logo: './logos/everteam.svg',
+    logoAlt: 'EVER TEAM logo',
   },
   {
     role: 'Software Developer',
@@ -156,6 +166,8 @@ export const experience: ExperienceItem[] = [
     period: 'Aug 2007 — Oct 2007',
     summary: 'Software development for electronic industry systems.',
     highlights: ['Contributed to application delivery and support'],
+    logo: './logos/aflak.svg',
+    logoAlt: 'AFLAK logo',
   },
   {
     role: 'Software Developer',
@@ -165,6 +177,8 @@ export const experience: ExperienceItem[] = [
     highlights: [
       'Built foundational insurance application experience that shaped later enterprise work',
     ],
+    logo: './logos/alahlia.svg',
+    logoAlt: 'AL AHLIA logo',
   },
 ]
 

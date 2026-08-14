@@ -135,6 +135,7 @@ app.innerHTML = `
     <nav class="nav" aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -196,7 +197,7 @@ app.innerHTML = `
       </div>
     </section>
 
-    <section id="credentials" class="section section-credentials">
+    <section id="education" class="section section-credentials">
       <div class="credentials-layout">
         <div>
           <div class="section-head reveal">

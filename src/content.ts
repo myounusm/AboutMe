@@ -157,8 +157,8 @@ export const experience: ExperienceItem[] = [
       'Implemented service-oriented solutions and database-backed applications',
       'Collaborated with stakeholders on requirements through release',
     ],
-    logo: './logos/everteam.svg',
-    logoAlt: 'EVER TEAM logo',
+    logo: './logos/everteam.png',
+    logoAlt: 'everteam, a Kyocera Group company logo',
   },
   {
     role: 'Software Developer',

@@ -9,6 +9,7 @@ import {
   certifications,
   contact,
 } from './content.ts'
+import { iconForSkill } from './skill-icons.ts'
 
 const app = document.querySelector<HTMLDivElement>('#app')
 
@@ -31,7 +32,15 @@ function renderSkills(): string {
       <div class="skill-group reveal">
         <h3 class="skill-label">${escapeHtml(group.label)}</h3>
         <ul class="skill-list">
-          ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+          ${group.items
+            .map(
+              (item) => `
+            <li>
+              ${iconForSkill(item)}
+              <span>${escapeHtml(item)}</span>
+            </li>`,
+            )
+            .join('')}
         </ul>
       </div>`,
     )

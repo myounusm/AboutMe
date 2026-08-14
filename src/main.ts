@@ -10,7 +10,7 @@ import {
   contact,
 } from './content.ts'
 import { iconForSkill } from './skill-icons.ts'
-import { sectionIcon, type SectionIconId } from './section-icons.ts'
+import { sectionIcon, navIcon, type SectionIconId } from './section-icons.ts'
 
 const app = document.querySelector<HTMLDivElement>('#app')
 
@@ -32,6 +32,10 @@ function renderSectionHeading(iconId: SectionIconId, title: string): string {
       <span class="section-icon" aria-hidden="true">${sectionIcon(iconId)}</span>
       <h2>${escapeHtml(title)}</h2>
     </div>`
+}
+
+function renderNavLink(href: string, iconId: SectionIconId, label: string): string {
+  return `<a href="${escapeHtml(href)}"><span class="nav-icon" aria-hidden="true">${navIcon(iconId)}</span><span>${escapeHtml(label)}</span></a>`
 }
 
 function renderSkills(): string {
@@ -215,13 +219,13 @@ app.innerHTML = `
   <header class="site-header">
     <a class="brand" href="#top">${escapeHtml(profile.shortName)}</a>
     <nav class="nav" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#education">Education</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      ${renderNavLink('#work', 'work', 'Work')}
+      ${renderNavLink('#experience', 'experience', 'Experience')}
+      ${renderNavLink('#skills', 'skills', 'Skills')}
+      ${renderNavLink('#education', 'education', 'Education')}
+      ${renderNavLink('#certifications', 'certifications', 'Certifications')}
+      ${renderNavLink('#about', 'about', 'About')}
+      ${renderNavLink('#contact', 'contact', 'Contact')}
     </nav>
   </header>
 

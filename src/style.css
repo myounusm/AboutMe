@@ -118,15 +118,31 @@ code {
 
 .nav {
   display: flex;
-  gap: clamp(0.85rem, 2vw, 1.5rem);
+  gap: clamp(0.7rem, 1.8vw, 1.35rem);
   font-size: 0.95rem;
   font-weight: 500;
 }
 
 .nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   text-decoration: none;
   color: var(--ink-soft);
   position: relative;
+}
+
+.nav-icon {
+  display: inline-flex;
+  color: var(--sea-deep);
+  line-height: 0;
+}
+
+.nav-icon-svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  display: block;
+  flex-shrink: 0;
 }
 
 .nav a::after {
@@ -145,6 +161,11 @@ code {
 .nav a:hover,
 .nav a:focus-visible {
   color: var(--ink);
+}
+
+.nav a:hover .nav-icon,
+.nav a:focus-visible .nav-icon {
+  color: var(--sea);
 }
 
 .nav a:hover::after,
@@ -308,36 +329,41 @@ code {
 .section-title {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.5em;
   margin: 0 0 0.65rem;
+  font-size: clamp(2.1rem, 4.4vw, 3rem);
+  line-height: 1.05;
 }
 
 .section-title h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: 1em;
   font-weight: 600;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: inherit;
 }
 
 .section-icon {
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   color: var(--sea-deep);
   background: none;
   border: 0;
   box-shadow: none;
   border-radius: 0;
-  width: auto;
-  height: auto;
+  width: 1em;
+  height: 1em;
   padding: 0;
+  line-height: 0;
+  translate: 0 0.02em;
 }
 
 .section-icon-svg {
-  width: 2.15rem;
-  height: 2.15rem;
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
@@ -359,21 +385,18 @@ code {
 
 .contact-copy .section-title {
   margin-bottom: 0.75rem;
-}
-
-.contact-copy .section-title h2 {
-  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
+  font-size: clamp(1.95rem, 3.8vw, 2.5rem);
 }
 
 .contact-copy .section-icon {
-  width: auto;
-  height: auto;
+  width: 1em;
+  height: 1em;
   border-radius: 0;
 }
 
 .contact-copy .section-icon-svg {
-  width: 1.85rem;
-  height: 1.85rem;
+  width: 100%;
+  height: 100%;
 }
 
 .project-list {
@@ -945,8 +968,15 @@ code {
 .contact-copy h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
   letter-spacing: -0.03em;
+}
+
+.contact-copy .section-title h2 {
+  font-size: 1em;
+}
+
+.contact-copy > h2 {
+  font-size: clamp(1.85rem, 3.5vw, 2.35rem);
 }
 
 .contact-copy > p {
@@ -1201,24 +1231,36 @@ code {
     margin-bottom: 1.5rem;
   }
 
-  .section-head h2,
-  .section-title h2 {
+  .section-head h2 {
     font-size: clamp(1.75rem, 8vw, 2.25rem);
   }
 
+  .section-title {
+    gap: 0.45em;
+    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+  }
+
+  .section-title h2 {
+    font-size: 1em;
+  }
+
   .section-icon {
-    width: auto;
-    height: auto;
-    border-radius: 0;
+    width: 1em;
+    height: 1em;
   }
 
   .section-icon-svg {
-    width: 1.85rem;
-    height: 1.85rem;
+    width: 100%;
+    height: 100%;
   }
 
-  .section-title {
-    gap: 0.7rem;
+  .nav a {
+    gap: 0.25rem;
+  }
+
+  .nav-icon-svg {
+    width: 0.85rem;
+    height: 0.85rem;
   }
 
   .project-row {

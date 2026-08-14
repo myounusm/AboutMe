@@ -144,6 +144,7 @@ app.innerHTML = `
     <nav class="nav" aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
       <a href="#education">Education</a>
       <a href="#certifications">Certifications</a>
       <a href="#about">About</a>
@@ -237,12 +238,25 @@ app.innerHTML = `
 
     <section id="contact" class="section section-contact">
       <div class="contact-panel reveal">
-        <h2>${escapeHtml(contact.heading)}</h2>
-        <p>${escapeHtml(contact.body)}</p>
-        <p class="contact-meta">${escapeHtml(profile.location)} · ${escapeHtml(profile.phone)}</p>
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">${escapeHtml(contact.cta)}</a>
-          <div class="socials">${socialLinks}</div>
+        <div class="contact-layout">
+          <div class="contact-photo-wrap">
+            <img
+              class="contact-photo"
+              src="${escapeHtml(profile.photoUrl)}"
+              alt="${escapeHtml(profile.photoAlt)}"
+              width="160"
+              height="160"
+            />
+          </div>
+          <div class="contact-copy">
+            <h2>${escapeHtml(contact.heading)}</h2>
+            <p>${escapeHtml(contact.body)}</p>
+            <p class="contact-meta">${escapeHtml(profile.location)} · ${escapeHtml(profile.phone)}</p>
+            <div class="contact-actions">
+              <a class="btn btn-primary" href="mailto:${escapeHtml(profile.email)}">${escapeHtml(contact.cta)}</a>
+              <div class="socials">${socialLinks}</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -14,6 +14,8 @@ export interface Profile {
   location: string
   github: string
   linkedin: string
+  photoUrl: string
+  photoAlt: string
   resumeUrl: string
   heroImage: string
   heroImageAlt: string
@@ -81,7 +83,9 @@ export const profile: Profile = {
   phone: '+966 592889045',
   location: 'Jeddah, Saudi Arabia',
   github: 'https://github.com/myounusm',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/myounusm/',
+  photoUrl: './profile.png',
+  photoAlt: 'Portrait of Mohammed Younus Mohiuddin',
   resumeUrl: './Younus_CV.pdf',
   heroImage:
     'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80',

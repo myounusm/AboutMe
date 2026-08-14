@@ -47,47 +47,55 @@ function renderSkills(): string {
     .join('')
 }
 
-function renderExperience(): string {
-  // Newest → oldest (left to right)
-  const items = experience
+function shortCompany(company: string): string {
+  return company.split(',')[0]?.trim() || company
+}
 
+function renderExperience(): string {
   return `
-    <div class="timeline-wrap reveal">
-      <div class="timeline-controls">
-        <button type="button" class="timeline-nav timeline-nav-prev" aria-label="Scroll timeline left">
-          <span aria-hidden="true">‹</span>
-        </button>
-        <button type="button" class="timeline-nav timeline-nav-next" aria-label="Scroll timeline right">
-          <span aria-hidden="true">›</span>
-        </button>
+    <div class="exp-tabs reveal">
+      <div class="exp-tablist" role="tablist" aria-label="Work experience">
+        ${experience
+          .map(
+            (job, index) => `
+          <button
+            type="button"
+            class="exp-tab${index === 0 ? ' is-active' : ''}"
+            role="tab"
+            id="exp-tab-${index}"
+            aria-selected="${index === 0 ? 'true' : 'false'}"
+            aria-controls="exp-panel-${index}"
+            data-exp-index="${index}"
+          >
+            <span class="exp-tab-period">${escapeHtml(job.period)}</span>
+            <span class="exp-tab-role">${escapeHtml(job.role)}</span>
+            <span class="exp-tab-company">${escapeHtml(shortCompany(job.company))}</span>
+          </button>`,
+          )
+          .join('')}
       </div>
-      <div class="timeline-scroll" tabindex="0" aria-label="Career timeline, newest to oldest">
-        <div class="timeline-track" aria-hidden="true">
-          <div class="timeline-progress"></div>
-        </div>
-        <ol class="timeline">
-          ${items
-            .map(
-              (job, index) => `
-            <li class="timeline-item" style="--i: ${index}">
-              <div class="timeline-node" aria-hidden="true">
-                <span class="timeline-dot"></span>
-              </div>
-              <article class="timeline-card">
-                <p class="timeline-period">${escapeHtml(job.period)}</p>
-                <h3>${escapeHtml(job.role)}</h3>
-                <p class="timeline-company">${escapeHtml(job.company)}</p>
-                <p class="timeline-summary">${escapeHtml(job.summary)}</p>
-                <ul>
-                  ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
-                </ul>
-              </article>
-            </li>`,
-            )
-            .join('')}
-        </ol>
+      <div class="exp-panels">
+        ${experience
+          .map(
+            (job, index) => `
+          <article
+            class="exp-panel${index === 0 ? ' is-active' : ''}"
+            role="tabpanel"
+            id="exp-panel-${index}"
+            aria-labelledby="exp-tab-${index}"
+            ${index === 0 ? '' : 'hidden'}
+          >
+            <p class="exp-panel-period">${escapeHtml(job.period)}</p>
+            <h3>${escapeHtml(job.role)}</h3>
+            <p class="exp-panel-company">${escapeHtml(job.company)}</p>
+            <p class="exp-panel-summary">${escapeHtml(job.summary)}</p>
+            <ul>
+              ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
+            </ul>
+          </article>`,
+          )
+          .join('')}
       </div>
-      <p class="timeline-hint">Use the arrows to move through your career path</p>
     </div>`
 }
 
@@ -346,81 +354,55 @@ function initHeroParallax(): void {
   )
 }
 
-function initTimeline(): void {
-  const wrap = document.querySelector<HTMLElement>('.timeline-wrap')
-  const scroller = document.querySelector<HTMLElement>('.timeline-scroll')
-  const progress = document.querySelector<HTMLElement>('.timeline-progress')
-  const prevBtn = document.querySelector<HTMLButtonElement>('.timeline-nav-prev')
-  const nextBtn = document.querySelector<HTMLButtonElement>('.timeline-nav-next')
-  if (!wrap || !scroller || !progress) return
+function initExperienceTabs(): void {
+  const root = document.querySelector<HTMLElement>('.exp-tabs')
+  if (!root) return
 
-  const getStep = () => {
-    const card = scroller.querySelector<HTMLElement>('.timeline-item')
-    const list = scroller.querySelector<HTMLElement>('.timeline')
-    if (!card) return Math.max(280, scroller.clientWidth * 0.8)
-    let gap = 20
-    if (list) {
-      const styles = window.getComputedStyle(list)
-      gap = Number.parseFloat(styles.columnGap || styles.gap || '20') || 20
-    }
-    return card.getBoundingClientRect().width + gap
-  }
+  const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.exp-tab'))
+  const panels = Array.from(root.querySelectorAll<HTMLElement>('.exp-panel'))
 
-  const updateControls = () => {
-    const max = scroller.scrollWidth - scroller.clientWidth
-    const ratio = max > 0 ? scroller.scrollLeft / max : 1
-    progress.style.transform = `scaleX(${Math.max(0.08, ratio)})`
+  const activate = (index: number) => {
+    tabs.forEach((tab, i) => {
+      const selected = i === index
+      tab.classList.toggle('is-active', selected)
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false')
+      tab.tabIndex = selected ? 0 : -1
+    })
 
-    const atStart = scroller.scrollLeft <= 4
-    const atEnd = scroller.scrollLeft >= max - 4
-    prevBtn?.toggleAttribute('disabled', atStart || max <= 0)
-    nextBtn?.toggleAttribute('disabled', atEnd || max <= 0)
-    wrap.classList.toggle('is-scrollable', max > 4)
-  }
-
-  const scrollByDir = (dir: -1 | 1) => {
-    scroller.scrollBy({
-      left: dir * getStep(),
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        ? 'auto'
-        : 'smooth',
+    panels.forEach((panel, i) => {
+      const selected = i === index
+      panel.classList.toggle('is-active', selected)
+      panel.toggleAttribute('hidden', !selected)
+      if (selected) {
+        panel.classList.remove('is-entering')
+        void panel.offsetWidth
+        panel.classList.add('is-entering')
+      }
     })
   }
 
-  prevBtn?.addEventListener('click', () => scrollByDir(-1))
-  nextBtn?.addEventListener('click', () => scrollByDir(1))
-  scroller.addEventListener('scroll', updateControls, { passive: true })
-  window.addEventListener('resize', updateControls)
-  updateControls()
-
-  scroller.addEventListener(
-    'wheel',
-    (event) => {
-      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return
-      if (scroller.scrollWidth <= scroller.clientWidth) return
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => activate(index))
+    tab.addEventListener('keydown', (event) => {
+      let next = index
+      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+        next = (index + 1) % tabs.length
+      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+        next = (index - 1 + tabs.length) % tabs.length
+      } else if (event.key === 'Home') {
+        next = 0
+      } else if (event.key === 'End') {
+        next = tabs.length - 1
+      } else {
+        return
+      }
       event.preventDefault()
-      scroller.scrollLeft += event.deltaY
-    },
-    { passive: false },
-  )
+      tabs[next]?.focus()
+      activate(next)
+    })
+  })
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    wrap.classList.add('is-animated')
-    return
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          wrap.classList.add('is-animated')
-          observer.unobserve(wrap)
-        }
-      })
-    },
-    { threshold: 0.25 },
-  )
-  observer.observe(wrap)
+  activate(0)
 }
 
 requestAnimationFrame(() => {
@@ -428,5 +410,5 @@ requestAnimationFrame(() => {
   initReveal()
   initHeader()
   initHeroParallax()
-  initTimeline()
+  initExperienceTabs()
 })

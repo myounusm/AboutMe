@@ -532,13 +532,16 @@ function initActiveNav(): void {
         }
       })
 
-      let best: { link: HTMLAnchorElement; ratio: number } | null = null
-      sections.forEach(({ link, section }) => {
-        const ratio = visible.get(section) ?? 0
-        if (!best || ratio > best.ratio) {
-          best = { link, ratio }
-        }
-      })
+      const best = sections.reduce<{ link: HTMLAnchorElement; ratio: number } | null>(
+        (current, { link, section }) => {
+          const ratio = visible.get(section) ?? 0
+          if (!current || ratio > current.ratio) {
+            return { link, ratio }
+          }
+          return current
+        },
+        null,
+      )
 
       if (best && best.ratio > 0) {
         setActive(best.link)

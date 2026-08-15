@@ -715,11 +715,55 @@ code {
   align-items: start;
 }
 
-.exp-tablist {
+.exp-tab-rail {
   display: grid;
   gap: 0.55rem;
   position: sticky;
   top: calc(var(--header-h) + 0.75rem);
+}
+
+.exp-tab-shift {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--sea-deep);
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.exp-tab-shift:hover,
+.exp-tab-shift:focus-visible {
+  background: rgba(26, 107, 99, 0.1);
+  border-color: rgba(26, 107, 99, 0.28);
+  color: var(--sea);
+}
+
+.exp-tab-shift:focus-visible {
+  outline: 2px solid var(--sea);
+  outline-offset: 2px;
+}
+
+.exp-tab-shift:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+.exp-tablist {
+  display: grid;
+  gap: 0.55rem;
 }
 
 .exp-tab {
@@ -1180,6 +1224,18 @@ code {
     gap: 1.25rem;
   }
 
+  .exp-tab-rail {
+    position: static;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .exp-tab-shift {
+    display: inline-flex;
+  }
+
   .exp-tablist {
     position: static;
     display: grid;
@@ -1189,11 +1245,16 @@ code {
     overflow-x: auto;
     padding-bottom: 0.35rem;
     scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .exp-tablist::-webkit-scrollbar {
+    display: none;
   }
 
   .exp-tab {
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     min-height: unset;
     grid-template-columns: 1fr;
     align-items: center;

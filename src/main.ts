@@ -67,30 +67,38 @@ function shortCompany(company: string): string {
 function renderExperience(): string {
   return `
     <div class="exp-tabs reveal">
-      <div class="exp-tablist" role="tablist" aria-label="Work experience">
-        ${experience
-          .map(
-            (job, index) => `
-          <button
-            type="button"
-            class="exp-tab${index === 0 ? ' is-active' : ''}"
-            role="tab"
-            id="exp-tab-${index}"
-            aria-selected="${index === 0 ? 'true' : 'false'}"
-            aria-controls="exp-panel-${index}"
-            data-exp-index="${index}"
-          >
-            <span class="exp-tab-logo" aria-hidden="true">
-              <img src="${escapeHtml(job.logo)}" alt="" width="40" height="40" loading="lazy" />
-            </span>
-            <span class="exp-tab-copy">
-              <span class="exp-tab-period">${escapeHtml(job.period)}</span>
-              <span class="exp-tab-role">${escapeHtml(job.role)}</span>
-              <span class="exp-tab-company">${escapeHtml(shortCompany(job.company))}</span>
-            </span>
-          </button>`,
-          )
-          .join('')}
+      <div class="exp-tab-rail">
+        <button type="button" class="exp-tab-shift exp-tab-prev" aria-label="Previous experience" data-exp-shift="-1">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="exp-tablist" role="tablist" aria-label="Work experience">
+          ${experience
+            .map(
+              (job, index) => `
+            <button
+              type="button"
+              class="exp-tab${index === 0 ? ' is-active' : ''}"
+              role="tab"
+              id="exp-tab-${index}"
+              aria-selected="${index === 0 ? 'true' : 'false'}"
+              aria-controls="exp-panel-${index}"
+              data-exp-index="${index}"
+            >
+              <span class="exp-tab-logo" aria-hidden="true">
+                <img src="${escapeHtml(job.logo)}" alt="" width="40" height="40" loading="lazy" />
+              </span>
+              <span class="exp-tab-copy">
+                <span class="exp-tab-period">${escapeHtml(job.period)}</span>
+                <span class="exp-tab-role">${escapeHtml(job.role)}</span>
+                <span class="exp-tab-company">${escapeHtml(shortCompany(job.company))}</span>
+              </span>
+            </button>`,
+            )
+            .join('')}
+        </div>
+        <button type="button" class="exp-tab-shift exp-tab-next" aria-label="Next experience" data-exp-shift="1">
+          <span aria-hidden="true">›</span>
+        </button>
       </div>
       <div class="exp-panels">
         ${experience
@@ -443,10 +451,39 @@ function initExperienceTabs(): void {
   const root = document.querySelector<HTMLElement>('.exp-tabs')
   if (!root) return
 
+  const tablist = root.querySelector<HTMLElement>('.exp-tablist')
   const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.exp-tab'))
   const panels = Array.from(root.querySelectorAll<HTMLElement>('.exp-panel'))
+  const prevBtn = root.querySelector<HTMLButtonElement>('.exp-tab-prev')
+  const nextBtn = root.querySelector<HTMLButtonElement>('.exp-tab-next')
+  let activeIndex = 0
 
-  const activate = (index: number) => {
+  const scrollTabIntoView = (index: number) => {
+    const tab = tabs[index]
+    if (!tab || !tablist) return
+
+    const prefersReduced =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const behavior: ScrollBehavior = prefersReduced ? 'auto' : 'smooth'
+
+    // Keep the selected tab centered in the horizontal strip when possible.
+    const listWidth = tablist.clientWidth
+    const target =
+      tab.offsetLeft - (listWidth - tab.offsetWidth) / 2
+    tablist.scrollTo({
+      left: Math.max(0, target),
+      behavior,
+    })
+  }
+
+  const updateShiftButtons = (index: number) => {
+    prevBtn?.toggleAttribute('disabled', index <= 0)
+    nextBtn?.toggleAttribute('disabled', index >= tabs.length - 1)
+  }
+
+  const activate = (index: number, options?: { focus?: boolean }) => {
+    activeIndex = index
+
     tabs.forEach((tab, i) => {
       const selected = i === index
       tab.classList.toggle('is-active', selected)
@@ -464,6 +501,13 @@ function initExperienceTabs(): void {
         panel.classList.add('is-entering')
       }
     })
+
+    updateShiftButtons(index)
+    scrollTabIntoView(index)
+
+    if (options?.focus) {
+      tabs[index]?.focus({ preventScroll: true })
+    }
   }
 
   tabs.forEach((tab, index) => {
@@ -471,9 +515,9 @@ function initExperienceTabs(): void {
     tab.addEventListener('keydown', (event) => {
       let next = index
       if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-        next = (index + 1) % tabs.length
+        next = Math.min(tabs.length - 1, index + 1)
       } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-        next = (index - 1 + tabs.length) % tabs.length
+        next = Math.max(0, index - 1)
       } else if (event.key === 'Home') {
         next = 0
       } else if (event.key === 'End') {
@@ -482,10 +526,48 @@ function initExperienceTabs(): void {
         return
       }
       event.preventDefault()
-      tabs[next]?.focus()
-      activate(next)
+      activate(next, { focus: true })
     })
   })
+
+  prevBtn?.addEventListener('click', () => {
+    if (activeIndex > 0) activate(activeIndex - 1)
+  })
+
+  nextBtn?.addEventListener('click', () => {
+    if (activeIndex < tabs.length - 1) activate(activeIndex + 1)
+  })
+
+  // Swipe the panel left/right on touch devices to change tabs.
+  let touchStartX = 0
+  let touchStartY = 0
+  const panelsRoot = root.querySelector<HTMLElement>('.exp-panels')
+  panelsRoot?.addEventListener(
+    'touchstart',
+    (event) => {
+      const touch = event.changedTouches[0]
+      if (!touch) return
+      touchStartX = touch.clientX
+      touchStartY = touch.clientY
+    },
+    { passive: true },
+  )
+  panelsRoot?.addEventListener(
+    'touchend',
+    (event) => {
+      const touch = event.changedTouches[0]
+      if (!touch) return
+      const dx = touch.clientX - touchStartX
+      const dy = touch.clientY - touchStartY
+      if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return
+      if (dx < 0 && activeIndex < tabs.length - 1) {
+        activate(activeIndex + 1)
+      } else if (dx > 0 && activeIndex > 0) {
+        activate(activeIndex - 1)
+      }
+    },
+    { passive: true },
+  )
 
   activate(0)
 }

@@ -33,6 +33,7 @@ export interface ExperienceItem {
   period: string
   summary: string
   highlights: string[]
+  techStack?: string
   logo: string
   logoAlt: string
 }
@@ -130,15 +131,24 @@ export const experience: ExperienceItem[] = [
   },
   {
     role: 'Senior OutSystems Low-Code Developer',
-    company: 'Wataniya Insurance Company, Jeddah, Saudi Arabia',
+    company: 'Wataniya Insurance Company | Jeddah, Saudi Arabia',
     period: 'Jan 2023 — Dec 2025',
     summary:
-      'Built and evolved mission-critical insurance platforms using OutSystems, workflows, and enterprise integrations.',
+      'Hands-on development of enterprise-grade insurance applications using OutSystems, C#/.NET, APIs, SQL, integrations, and performance optimization.',
     highlights: [
-      'Delivered B2B and customer-facing insurance products with real-time quotation and issuance',
-      'Automated renewals, claims recovery, and partner portal operations',
-      'Integrated payment gateways, government APIs, SMS, and WhatsApp channels',
+      'Developed complex OutSystems Reactive Web and Traditional Web applications for B2B, Partner Portal, quotation, policy issuance, renewals, payments, endorsements, and recovery processes.',
+      'Built reusable Server Actions, Client Actions, Service Actions, Blocks, Components, business validations, workflows, and background processes following OutSystems best practices.',
+      'Developed custom C#/.NET Extensions using Integration Studio, including email functionality and integration of external .NET libraries for requirements beyond native OutSystems capabilities.',
+      'Designed and consumed REST and SOAP APIs, integrating applications with payment gateways, government services, internal insurance systems, and third-party platforms.',
+      'Designed and optimized Entities, Static Entities, Structures, Aggregates, Advanced SQL, relationships, and database access patterns for performance and scalability.',
+      'Worked extensively on Application Object (AO) reduction, application refactoring, dependency cleanup, reusable component consolidation, and technical-debt reduction.',
+      'Implemented Timers, scheduled jobs, asynchronous/background processing, caching, logging, audit trails, exception handling, and transaction management.',
+      'Integrated enterprise communication channels including SMS, WhatsApp, and Email, with dynamic templates, delivery-status handling, callbacks, logging, and error management.',
+      'Performed performance optimization and advanced debugging across Server Actions, APIs, SQL queries, integrations, loops, and high-volume data-processing operations.',
+      'Investigated and resolved complex application and production issues through root-cause analysis, permanent fixes, integration troubleshooting, UAT support, and production stabilization.',
     ],
+    techStack:
+      'OutSystems • Service Studio • Integration Studio • Reactive Web • Traditional Web • C# • .NET Extensions • REST APIs • SOAP • Advanced SQL • SQL Server • Timers • Integrations • Performance Optimization • AO Reduction',
     logo: './logos/wataniya.png',
     logoAlt: 'Wataniya Insurance logo',
   },

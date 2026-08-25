@@ -130,6 +130,11 @@ function renderExperience(): string {
             <ul>
               ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
             </ul>
+            ${
+              job.techStack
+                ? `<p class="exp-panel-stack"><span>Technical Stack:</span> ${escapeHtml(job.techStack)}</p>`
+                : ''
+            }
           </article>`,
           )
           .join('')}

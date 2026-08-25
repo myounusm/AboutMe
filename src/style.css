@@ -913,7 +913,7 @@ code {
 .exp-panel-summary {
   margin: 0 0 1rem;
   color: var(--ink-soft);
-  max-width: 54ch;
+  max-width: 62ch;
 }
 
 .exp-panel ul {
@@ -924,6 +924,21 @@ code {
 
 .exp-panel li + li {
   margin-top: 0.4rem;
+}
+
+.exp-panel-stack {
+  margin: 1.15rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--sea-deep);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.exp-panel-stack span {
+  font-weight: 700;
+  color: var(--ink);
 }
 
 @keyframes expPanelIn {

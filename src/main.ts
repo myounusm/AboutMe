@@ -39,12 +39,110 @@ function renderNavLink(href: string, iconId: SectionIconId, label: string): stri
 }
 
 function renderSkills(): string {
-  return skills.groups
+  const width = 1180
+  const height = 760
+  const cx = width / 2
+  const cy = height / 2
+  const groupRadius = 205
+  const leafRadius = 355
+
+  // Spread three branches around the hub.
+  const groupAngles = [-Math.PI * 0.95, -Math.PI * 0.18, Math.PI * 0.45]
+
+  const polar = (radius: number, angle: number) => ({
+    x: cx + radius * Math.cos(angle),
+    y: cy + radius * Math.sin(angle),
+  })
+
+  const curve = (
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    bend = 0.34,
+  ) => {
+    const mx = (x1 + x2) / 2
+    const my = (y1 + y2) / 2
+    const dx = x2 - x1
+    const dy = y2 - y1
+    const qx = mx - dy * bend
+    const qy = my + dx * bend
+    return `M ${x1.toFixed(1)} ${y1.toFixed(1)} Q ${qx.toFixed(1)} ${qy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`
+  }
+
+  const branches = skills.groups.map((group, groupIndex) => {
+    const angle = groupAngles[groupIndex] ?? groupIndex * ((Math.PI * 2) / 3)
+    const groupPos = polar(groupRadius, angle)
+    const count = group.items.length
+    const spread = Math.min(1.15, 0.28 + count * 0.12)
+    const start = angle - spread / 2
+
+    const leaves = group.items.map((item, itemIndex) => {
+      const leafAngle =
+        count === 1 ? angle : start + (spread * itemIndex) / Math.max(count - 1, 1)
+      const pos = polar(leafRadius, leafAngle)
+      return { item, pos, path: curve(groupPos.x, groupPos.y, pos.x, pos.y, 0.18) }
+    })
+
+    return {
+      group,
+      groupIndex,
+      groupPos,
+      hubPath: curve(cx, cy, groupPos.x, groupPos.y, 0.22),
+      leaves,
+    }
+  })
+
+  const svgLinks = branches
     .map(
-      (group) => `
-      <div class="skill-group reveal">
-        <h3 class="skill-label">${escapeHtml(group.label)}</h3>
-        <ul class="skill-list">
+      (branch) => `
+      <g class="mind-branch" data-branch="${branch.groupIndex}">
+        <path class="mind-link mind-link-hub" d="${branch.hubPath}" />
+        ${branch.leaves
+          .map((leaf) => `<path class="mind-link mind-link-leaf" d="${leaf.path}" />`)
+          .join('')}
+      </g>`,
+    )
+    .join('')
+
+  const svgNodes = branches
+    .map(
+      (branch) => `
+      <g class="mind-branch-nodes" data-branch="${branch.groupIndex}">
+        <g class="mind-node mind-node-group" transform="translate(${branch.groupPos.x.toFixed(1)} ${branch.groupPos.y.toFixed(1)})">
+          <circle r="46" />
+          <text text-anchor="middle" dominant-baseline="middle">
+            ${branch.group.label
+              .split(/[&/]/)
+              .map((part) => part.trim())
+              .filter(Boolean)
+              .slice(0, 2)
+              .map(
+                (line, i, arr) =>
+                  `<tspan x="0" dy="${i === 0 ? (arr.length > 1 ? '-0.35em' : '0.05em') : '1.15em'}">${escapeHtml(line)}</tspan>`,
+              )
+              .join('')}
+          </text>
+        </g>
+        ${branch.leaves
+          .map(
+            (leaf) => `
+          <g class="mind-node mind-node-leaf" transform="translate(${leaf.pos.x.toFixed(1)} ${leaf.pos.y.toFixed(1)})">
+            <rect x="-86" y="-18" width="172" height="36" rx="18" />
+            <text text-anchor="middle" dominant-baseline="middle">${escapeHtml(leaf.item)}</text>
+          </g>`,
+          )
+          .join('')}
+      </g>`,
+    )
+    .join('')
+
+  const mobileBranches = skills.groups
+    .map(
+      (group, groupIndex) => `
+      <div class="mind-mobile-branch reveal" style="--i: ${groupIndex}">
+        <div class="mind-mobile-group">${escapeHtml(group.label)}</div>
+        <ul class="mind-mobile-leaves">
           ${group.items
             .map(
               (item) => `
@@ -58,6 +156,54 @@ function renderSkills(): string {
       </div>`,
     )
     .join('')
+
+  return `
+    <div class="skills-mindmap reveal" data-skills-mindmap>
+      <svg
+        class="mind-svg"
+        viewBox="0 0 ${width} ${height}"
+        role="img"
+        aria-label="Skills mind map showing back-end, APIs and front-end, and data AI platforms"
+      >
+        <defs>
+          <radialGradient id="mindHubGlow" cx="50%" cy="45%" r="65%">
+            <stop offset="0%" stop-color="rgba(26,107,99,0.28)" />
+            <stop offset="100%" stop-color="rgba(26,107,99,0)" />
+          </radialGradient>
+        </defs>
+        <circle class="mind-glow" cx="${cx}" cy="${cy}" r="120" fill="url(#mindHubGlow)" />
+        ${svgLinks}
+        <g class="mind-node mind-node-hub" transform="translate(${cx} ${cy})">
+          <circle r="68" />
+          <text text-anchor="middle" dominant-baseline="middle">
+            <tspan x="0" dy="-0.35em">Skills</tspan>
+            <tspan x="0" dy="1.2em" class="mind-hub-sub">Mind Map</tspan>
+          </text>
+        </g>
+        ${svgNodes}
+      </svg>
+
+      <div class="mind-mobile" aria-hidden="true">
+        <div class="mind-mobile-hub">Skills</div>
+        <div class="mind-mobile-branches">
+          ${mobileBranches}
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-sr-only">
+      ${skills.groups
+        .map(
+          (group) => `
+        <div>
+          <h3>${escapeHtml(group.label)}</h3>
+          <ul>
+            ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+          </ul>
+        </div>`,
+        )
+        .join('')}
+    </div>`
 }
 
 function shortCompany(company: string): string {
@@ -331,7 +477,7 @@ app.innerHTML = `
         ${renderSectionHeading('skills', skills.heading)}
         <p>${escapeHtml(skills.lead)}</p>
       </div>
-      <div class="skills-grid">
+      <div class="skills-map-wrap">
         ${renderSkills()}
       </div>
     </section>
@@ -684,6 +830,32 @@ function initActiveNav(): void {
   sections.forEach(({ section }) => observer.observe(section))
 }
 
+function initSkillsMindmap(): void {
+  const root = document.querySelector<HTMLElement>('[data-skills-mindmap]')
+  if (!root) return
+
+  root.classList.add('is-ready')
+
+  const branches = Array.from(root.querySelectorAll<SVGGElement>('.mind-branch'))
+  const nodeGroups = Array.from(
+    root.querySelectorAll<SVGGElement>('.mind-branch-nodes'),
+  )
+
+  const setActive = (index: string | null) => {
+    branches.forEach((branch) => {
+      branch.classList.toggle('is-active', branch.dataset.branch === index)
+    })
+    nodeGroups.forEach((group) => {
+      group.classList.toggle('is-active', group.dataset.branch === index)
+    })
+  }
+
+  nodeGroups.forEach((group) => {
+    group.addEventListener('pointerenter', () => setActive(group.dataset.branch ?? null))
+    group.addEventListener('pointerleave', () => setActive(null))
+  })
+}
+
 requestAnimationFrame(() => {
   document.body.classList.add('is-ready')
   initReveal()
@@ -691,5 +863,6 @@ requestAnimationFrame(() => {
   initHeroParallax()
   initFlashCards()
   initExperienceTabs()
+  initSkillsMindmap()
   initActiveNav()
 })

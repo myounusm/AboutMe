@@ -1356,13 +1356,13 @@ code {
 .skills-mindmap.is-ready .mind-leaf,
 .skills-mindmap.is-ready .mind-rail,
 .skills-mindmap.is-ready .mind-core {
-  animation: mindPopIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--d, 0) * 120ms);
+  animation: mindPopIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--d, 0) * 150ms);
 }
 
 .skills-mindmap.is-ready .mind-spline {
-  animation: mindDraw 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--d, 0) * 120ms);
+  animation: mindDraw 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--d, 0) * 150ms);
 }
 
 @keyframes mindPopIn {

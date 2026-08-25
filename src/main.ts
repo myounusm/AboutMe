@@ -299,7 +299,21 @@ function renderCertifications(): string {
     .map(
       (group) => `
       <div class="cert-group reveal">
-        <h3 class="cert-group-label">${escapeHtml(group.label)}</h3>
+        <div class="cert-group-head">
+          ${
+            group.logo
+              ? `<img
+                  class="cert-group-logo"
+                  src="${escapeHtml(group.logo)}"
+                  alt="${escapeHtml(group.logoAlt ?? '')}"
+                  width="140"
+                  height="32"
+                  loading="lazy"
+                />`
+              : ''
+          }
+          <h3 class="cert-group-label">${escapeHtml(group.label)}</h3>
+        </div>
         <ul class="cert-grid">
           ${group.items
             .map(

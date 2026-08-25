@@ -1458,8 +1458,24 @@ code {
   margin-top: clamp(1.75rem, 4vw, 2.5rem);
 }
 
-.cert-group-label {
+.cert-group-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   margin: 0 0 0.95rem;
+  flex-wrap: wrap;
+}
+
+.cert-group-logo {
+  display: block;
+  height: 1.85rem;
+  width: auto;
+  max-width: 9.5rem;
+  object-fit: contain;
+}
+
+.cert-group-label {
+  margin: 0;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;

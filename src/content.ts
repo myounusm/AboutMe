@@ -77,6 +77,8 @@ export interface CertificationItem {
 export interface CertificationGroup {
   label: string
   items: CertificationItem[]
+  logo?: string
+  logoAlt?: string
 }
 
 export interface Certifications {
@@ -417,6 +419,8 @@ export const certifications: Certifications = {
   groups: [
     {
       label: 'OutSystems Certifications',
+      logo: './logos/outsystems.svg',
+      logoAlt: 'OutSystems logo',
       items: [
         { name: 'Platform Ops (O11)', since: 'Jun 24, 2025' },
         { name: 'Tech Lead (O11)', since: 'Jun 18, 2025' },
@@ -429,6 +433,8 @@ export const certifications: Certifications = {
     },
     {
       label: 'OutSystems Specializations',
+      logo: './logos/outsystems.svg',
+      logoAlt: 'OutSystems logo',
       items: [
         { name: 'Architecture Specialist (ODC)', since: 'Jan 17, 2026' },
         { name: 'Web Developer Specialist (ODC)', since: 'Dec 28, 2024' },

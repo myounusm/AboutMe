@@ -235,10 +235,32 @@ export const experience: ExperienceItem[] = [
     role: 'Software Developer',
     company: 'AFLAK Electronic Industries Co.',
     period: 'Aug 2007 — Oct 2007',
-    summary: 'Software development for electronic industry systems.',
+    summary:
+      'Worked on desktop applications integrated with electronic hardware devices, gaining hands-on experience with device communication, low-level data handling, and hardware-software integration.',
     highlights: [
-      { text: 'Contributed to application delivery and support' },
+      {
+        title: 'Desktop Application Development',
+        text: 'Developed and supported Windows desktop applications using VB.NET, integrated with electronic and peripheral devices.',
+      },
+      {
+        title: 'Biometric & Barcode Integration',
+        text: 'Worked with fingerprint attendance systems, barcode devices, and related electronic peripherals, handling device data exchange and application-side processing.',
+      },
+      {
+        title: 'Retail Security Systems',
+        text: 'Supported applications integrated with product security and detection devices used in shopping malls and retail environments.',
+      },
+      {
+        title: 'Hardware–Software Communication',
+        text: 'Gained practical experience in device protocols, binary data representation, low-level communication, and processing of raw binary data between applications and hardware devices.',
+      },
+      {
+        title: 'Technical Exposure',
+        text: 'Although a short tenure, the role provided valuable experience in hardware integration, device-driven applications, troubleshooting, and low-level system communication.',
+      },
     ],
+    techStack:
+      'VB.NET • .NET Framework • Windows Desktop Applications • Device Integration • Fingerprint Systems • Barcode Integration • Retail Security Devices • Binary Data Handling • Hardware–Software Communication',
     logo: './logos/aflak.png',
     logoAlt: 'Aflak Electronics Industries Company logo',
   },

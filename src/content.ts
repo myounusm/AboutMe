@@ -268,12 +268,32 @@ export const experience: ExperienceItem[] = [
     role: 'Software Developer',
     company: 'AL AHLIA for Cooperative Insurance',
     period: 'Mar 2005 — Jul 2007',
-    summary: 'Early career software development in the insurance domain.',
+    summary:
+      'Started my career in the insurance domain, developing .NET desktop applications integrated with Oracle databases and supporting distributed insurance sales operations.',
     highlights: [
       {
-        text: 'Built foundational insurance application experience that shaped later enterprise work',
+        title: 'Insurance Desktop Application Development',
+        text: 'Developed small .NET-based desktop applications used by insurance brokers to sell policies directly at customer and corporate locations.',
+      },
+      {
+        title: 'Oracle Database Development',
+        text: 'Worked with Oracle Database, including SQL queries, Stored Procedures, data export/import, database backup activities, and application data management.',
+      },
+      {
+        title: 'Offline Sales & Data Synchronization',
+        text: 'Supported broker applications that operated offline on laptops, allowing policies to be issued and printed remotely, with data synchronized to the central production database once connected to the company network.',
+      },
+      {
+        title: 'Reporting & Policy Printing',
+        text: 'Created and maintained Crystal Reports for policy documents, operational reports, and customer-facing printouts generated directly from the desktop application.',
+      },
+      {
+        title: 'Application Support & Data Operations',
+        text: 'Handled application enhancements, troubleshooting, data synchronization issues, database operations, and support for broker-side insurance applications.',
       },
     ],
+    techStack:
+      '.NET • Desktop Applications • Oracle Database • SQL • Stored Procedures • Crystal Reports • Data Synchronization • Import/Export • Database Backup • Offline Applications • Insurance Systems',
     logo: './logos/alahlia.png',
     logoAlt: 'AL AHLIA for cooperative insurance logo',
   },

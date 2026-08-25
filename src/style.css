@@ -1706,10 +1706,6 @@ code {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .mind-leaves-hang .mind-leaf:nth-child(n + 5) {
-    /* wrap remaining onto second row */
-  }
-
   .mind-hub-ring {
     width: min(15rem, 100%);
   }

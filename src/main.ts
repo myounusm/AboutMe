@@ -126,7 +126,11 @@ function renderExperience(): string {
                 <p class="exp-panel-company">${escapeHtml(job.company)}</p>
               </div>
             </div>
-            <p class="exp-panel-summary">${escapeHtml(job.summary)}</p>
+            ${
+              job.summary
+                ? `<p class="exp-panel-summary">${escapeHtml(job.summary)}</p>`
+                : ''
+            }
             <ul>
               ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
             </ul>

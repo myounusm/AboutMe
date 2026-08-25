@@ -107,14 +107,23 @@ Expert in enterprise solution design, digital transformation, and building scala
 export const experience: ExperienceItem[] = [
   {
     role: 'Tech Lead – Software Development',
-    company: 'Wataniya Insurance Company, Jeddah, Saudi Arabia',
+    company: 'Wataniya Insurance Company | Jeddah, Saudi Arabia',
     period: 'Jan 2026 — Present',
     summary:
-      'Leading software delivery with a focus on scalable architecture, digital transformation, and high-performance enterprise systems.',
+      'Leading software delivery with a focus on scalable architecture, digital transformation, secure integrations, production stability, and high-performance enterprise systems.',
     highlights: [
-      'Guide architecture, delivery, and engineering practices across product initiatives',
-      'Mentor developers through code reviews and technical leadership',
-      'Drive secure, integration-heavy platforms for insurance operations',
+      'Lead technical architecture, solution design, and end-to-end delivery across key product initiatives',
+      'Manage OutSystems LifeTime, including application deployments across Development, UAT, and Production environments',
+      'Coordinate and execute production deployments, hotfixes, rollback activities, and release management',
+      'Manage OutSystems users, roles, permissions, and environment access',
+      'Handle and troubleshoot production issues, incidents, and service requests raised through ManageEngine',
+      'Monitor critical applications and integrations, ensuring production stability and timely issue resolution',
+      'Establish and promote engineering best practices, code quality, scalability, security, and maintainability',
+      'Mentor developers through technical guidance, solution reviews, code reviews, and troubleshooting support',
+      'Drive secure and integration-heavy platforms supporting core insurance operations and digital services',
+      'Collaborate closely with business stakeholders, vendors, product teams, architects, and technology teams to deliver reliable enterprise solutions',
+      'Support release planning, impact analysis, technical risk assessment, and production readiness',
+      'Identify opportunities to improve application performance, deployment processes, development efficiency, and overall technical quality',
     ],
     logo: './logos/wataniya.png',
     logoAlt: 'Wataniya Insurance logo',

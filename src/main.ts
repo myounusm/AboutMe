@@ -61,7 +61,7 @@ function renderSkills(): string {
 }
 
 function shortCompany(company: string): string {
-  return company.split(',')[0]?.trim() || company
+  return company.split(/[|,]/)[0]?.trim() || company
 }
 
 function renderExperience(): string {

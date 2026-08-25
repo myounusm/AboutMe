@@ -137,7 +137,14 @@ function renderExperience(): string {
                   (h, i) => `
                 <li>
                   <span class="exp-point-num" aria-hidden="true">${i + 1}</span>
-                  <span class="exp-point-text">${escapeHtml(h)}</span>
+                  <div class="exp-point-body">
+                    ${
+                      h.title
+                        ? `<p class="exp-point-title">${escapeHtml(h.title)}</p>`
+                        : ''
+                    }
+                    <p class="exp-point-text">${escapeHtml(h.text)}</p>
+                  </div>
                 </li>`,
                 )
                 .join('')}

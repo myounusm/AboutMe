@@ -131,9 +131,17 @@ function renderExperience(): string {
                 ? `<p class="exp-panel-summary">${escapeHtml(job.summary)}</p>`
                 : ''
             }
-            <ul>
-              ${job.highlights.map((h) => `<li>${escapeHtml(h)}</li>`).join('')}
-            </ul>
+            <ol class="exp-points">
+              ${job.highlights
+                .map(
+                  (h, i) => `
+                <li>
+                  <span class="exp-point-num" aria-hidden="true">${i + 1}</span>
+                  <span class="exp-point-text">${escapeHtml(h)}</span>
+                </li>`,
+                )
+                .join('')}
+            </ol>
             ${
               job.techStack
                 ? `<p class="exp-panel-stack"><span>Technical Stack:</span> ${escapeHtml(job.techStack)}</p>`

@@ -56,7 +56,7 @@ const skillBranchMeta = [
 const hubPersonIcon = `<svg class="mind-hub-icon" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
   <path d="M32 34c-7.2 0-13 5.8-13 13v3h26v-3c0-7.2-5.8-13-13-13z" fill="currentColor" opacity="0.92"/>
   <circle cx="32" cy="22" r="9" fill="currentColor"/>
-  <path d="M20 12l2.2-4.2L26 9l-1.2 4.4L20 12zm12-3.5l2.4-4.6L38 5.5l-1.4 4.8L32 8.5zm12 3.5l-4.8 1.4L38 9l3.8-1.2L44 12z" fill="#f5c542"/>
+  <path d="M20 12l2.2-4.2L26 9l-1.2 4.4L20 12zm12-3.5l2.4-4.6L38 5.5l-1.4 4.8L32 8.5zm12 3.5l-4.8 1.4L38 9l3.8-1.2L44 12z" fill="currentColor" class="mind-hub-stars"/>
 </svg>`
 
 const coreStrengthsIcon = `<svg class="mind-core-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -418,6 +418,7 @@ app.innerHTML = `
     <section id="skills" class="section section-skills">
       <div class="section-head reveal">
         ${renderSectionHeading('skills', skills.heading)}
+        <p>${escapeHtml(skills.lead)}</p>
       </div>
       <div class="skills-map-wrap reveal">
         ${renderSkills()}

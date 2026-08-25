@@ -314,7 +314,7 @@ export const experience: ExperienceItem[] = [
 
 export const skills: Skills = {
   heading: 'Skills',
-  lead: 'Cursor AI, OutSystems Low-code, .NET, integrations, data, and Azure AI.',
+  lead: 'Cursor AI, GitHub Copilot, OutSystems Low-code, .NET, integrations, data, and Azure AI.',
   groups: [
     {
       label: 'BACK-END',
@@ -342,6 +342,7 @@ export const skills: Skills = {
       label: 'DATA, AI & PLATFORMS',
       items: [
         'Cursor AI',
+        'GitHub Copilot',
         'Microsoft SQL Server',
         'Oracle / PL-SQL',
         'Azure AI Services',

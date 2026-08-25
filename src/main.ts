@@ -128,7 +128,7 @@ function renderSkills(): string {
         }
       </div>
 
-      <div class="mind-core" style="--d: 12">
+      <div class="mind-core" style="--d: ${5 + (data?.items.length ?? 0) + 1}">
         ${coreStrengthsIcon}
         <p><strong>Core Strengths:</strong> ${escapeHtml(skills.coreStrengths)}</p>
       </div>

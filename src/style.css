@@ -1270,7 +1270,7 @@ code {
 .mind-leaves-hang {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.55rem;
   align-items: start;
   padding-top: 0.85rem;
@@ -1296,6 +1296,10 @@ code {
   background: var(--mind-purple);
   transform: translateX(-50%);
   opacity: 0.85;
+}
+
+.mind-leaves-hang .mind-leaf:nth-child(n + 5)::before {
+  display: none;
 }
 
 .mind-leaves-hang .mind-leaf-icon {

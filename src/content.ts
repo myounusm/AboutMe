@@ -200,18 +200,34 @@ export const experience: ExperienceItem[] = [
   },
   {
     role: 'Senior .NET Software Developer',
-    company: 'EVER TEAM, Riyadh, Saudi Arabia',
+    company: 'EVER TEAM | Riyadh, Saudi Arabia',
     period: 'Nov 2007 — Aug 2012',
     summary:
-      'Delivered .NET enterprise applications and system integrations for business clients.',
+      'Worked in a software house environment, delivering customized .NET solutions for multiple clients and supporting the full lifecycle from requirements gathering to on-premises production deployment.',
     highlights: [
       {
-        text: 'Implemented service-oriented solutions and database-backed applications',
+        title: 'Multi-Client .NET Development',
+        text: 'Developed and enhanced enterprise applications using C#, .NET Framework, ASP.NET, SQL Server, and service-oriented architecture, adapting solutions to different client requirements and business domains.',
       },
       {
-        text: 'Collaborated with stakeholders on requirements through release',
+        title: 'Client-Facing Requirement Analysis',
+        text: 'Visited client locations with the Project Manager to understand business requirements, analyze change requests, clarify technical needs, and translate them into practical software enhancements.',
+      },
+      {
+        title: 'Customization & Issue Resolution',
+        text: 'Implemented client-specific features, modifications, integrations, and database changes while troubleshooting and fixing application issues reported from live environments.',
+      },
+      {
+        title: 'On-Premises Deployment & Production Support',
+        text: 'Deployed application releases, patches, and database updates directly to client on-premises production servers, validating deployments and resolving post-release issues.',
+      },
+      {
+        title: 'End-to-End Delivery & Support',
+        text: 'Supported multiple customers across requirements, development, testing, deployment, production troubleshooting, and ongoing application maintenance, gaining strong exposure to real-world enterprise environments.',
       },
     ],
+    techStack:
+      '.NET Framework • C# • ASP.NET • SQL Server • Web Services • Service-Oriented Architecture (SOA) • Stored Procedures • Database Development • System Integration • On-Premises Deployment • Production Support • Client-Site Support',
     logo: './logos/everteam.png',
     logoAlt: 'everteam, a Kyocera Group company logo',
   },

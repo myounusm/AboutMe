@@ -52,6 +52,7 @@ export interface Skills {
   heading: string
   lead: string
   groups: SkillGroup[]
+  coreStrengths: string
 }
 
 export interface Project {
@@ -314,7 +315,7 @@ export const skills: Skills = {
   lead: 'Cursor AI, OutSystems Low-code, .NET, integrations, data, and Azure AI.',
   groups: [
     {
-      label: 'Back-end',
+      label: 'BACK-END',
       items: [
         'ASP.NET Core (MVC)',
         'C# / .NET',
@@ -325,7 +326,7 @@ export const skills: Skills = {
       ],
     },
     {
-      label: 'APIs & front-end',
+      label: 'APIS & FRONT-END',
       items: [
         'REST & SOAP APIs',
         'JWT Authentication',
@@ -336,7 +337,7 @@ export const skills: Skills = {
       ],
     },
     {
-      label: 'Data, AI & platforms',
+      label: 'DATA, AI & PLATFORMS',
       items: [
         'Cursor AI',
         'Microsoft SQL Server',
@@ -348,6 +349,8 @@ export const skills: Skills = {
       ],
     },
   ],
+  coreStrengths:
+    'Building scalable enterprise solutions • Integrations & APIs • Data management • AI-powered capabilities • Performance & security • Modern development best practices',
 }
 
 export const projects: Project[] = [

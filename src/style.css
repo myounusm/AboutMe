@@ -1121,9 +1121,9 @@ code {
 
 .mind-hub-lead {
   margin: 0.35rem auto 0;
-  max-width: 12.5rem;
-  font-size: 0.72rem;
-  line-height: 1.35;
+  max-width: 11.5rem;
+  font-size: 0.68rem;
+  line-height: 1.4;
   color: rgba(26, 43, 74, 0.72);
   font-weight: 500;
 }
@@ -1356,13 +1356,13 @@ code {
 .skills-mindmap.is-ready .mind-leaf,
 .skills-mindmap.is-ready .mind-rail,
 .skills-mindmap.is-ready .mind-core {
-  animation: mindPopIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--d, 0) * 90ms);
+  animation: mindPopIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--d, 0) * 120ms);
 }
 
 .skills-mindmap.is-ready .mind-spline {
-  animation: mindDraw 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(var(--d, 0) * 90ms);
+  animation: mindDraw 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--d, 0) * 120ms);
 }
 
 @keyframes mindPopIn {

@@ -763,6 +763,7 @@ function initSkillsMindmap(): void {
   if (!root) return
 
   const play = () => {
+    if (root.classList.contains('is-ready')) return
     root.classList.add('is-ready')
   }
 
@@ -771,12 +772,12 @@ function initSkillsMindmap(): void {
   } else if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
+        if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.35)) {
           play()
           observer.disconnect()
         }
       },
-      { threshold: 0.25 },
+      { threshold: [0.35, 0.5, 0.65] },
     )
     observer.observe(root)
   } else {

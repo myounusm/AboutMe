@@ -68,9 +68,19 @@ export interface EducationItem {
   period: string
 }
 
+export interface CertificationItem {
+  name: string
+  since?: string
+}
+
+export interface CertificationGroup {
+  label: string
+  items: CertificationItem[]
+}
+
 export interface Certifications {
   heading: string
-  items: string[]
+  groups: CertificationGroup[]
 }
 
 export interface Contact {
@@ -401,11 +411,38 @@ export const education: EducationItem[] = [
 
 export const certifications: Certifications = {
   heading: 'Certifications',
-  items: [
-    '12× OutSystems certified (Architecture Specialist, Professional Web/Mobile Developer, Security Specialist, Tech Lead, and more)',
-    'Microsoft Certified: Azure AI Fundamentals',
-    'Microsoft 365 Certified: Fundamentals',
-    'SCRUM Fundamentals',
+  groups: [
+    {
+      label: 'OutSystems Certifications',
+      items: [
+        { name: 'Platform Ops (O11)', since: 'Jun 24, 2025' },
+        { name: 'Tech Lead (O11)', since: 'Jun 18, 2025' },
+        { name: 'Associate Traditional Web Developer (O11)', since: 'Jun 27, 2024' },
+        { name: 'Professional Mobile Developer (O11)', since: 'Nov 03, 2023' },
+        { name: 'Professional Web Developer (O11)', since: 'Nov 03, 2023' },
+        { name: 'Associate Developer (ODC)', since: 'Jul 24, 2023' },
+        { name: 'Associate Developer (O11)', since: 'Jun 10, 2023' },
+      ],
+    },
+    {
+      label: 'OutSystems Specializations',
+      items: [
+        { name: 'Architecture Specialist (ODC)', since: 'Jan 17, 2026' },
+        { name: 'Web Developer Specialist (ODC)', since: 'Dec 28, 2024' },
+        { name: 'Architecture Specialist (O11)', since: 'Nov 03, 2023' },
+        { name: 'Security Specialist (O11 and ODC)', since: 'Sep 13, 2023' },
+        { name: 'Web Developer Specialist (O11)', since: 'Aug 25, 2023' },
+        { name: 'Mobile Developer Specialist (O11 and ODC)', since: 'Jul 13, 2023' },
+      ],
+    },
+    {
+      label: 'Additional Credentials',
+      items: [
+        { name: 'Microsoft Certified: Azure AI Fundamentals' },
+        { name: 'Microsoft 365 Certified: Fundamentals' },
+        { name: 'SCRUM Fundamentals' },
+      ],
+    },
   ],
 }
 

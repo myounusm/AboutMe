@@ -220,10 +220,29 @@ function renderEducation(): string {
 }
 
 function renderCertifications(): string {
-  return `
-    <ul class="cert-list reveal">
-      ${certifications.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
-    </ul>`
+  return certifications.groups
+    .map(
+      (group) => `
+      <div class="cert-group reveal">
+        <h3 class="cert-group-label">${escapeHtml(group.label)}</h3>
+        <ul class="cert-grid">
+          ${group.items
+            .map(
+              (item) => `
+            <li class="cert-card">
+              <p class="cert-name">${escapeHtml(item.name)}</p>
+              ${
+                item.since
+                  ? `<p class="cert-since">Since ${escapeHtml(item.since)}</p>`
+                  : ''
+              }
+            </li>`,
+            )
+            .join('')}
+        </ul>
+      </div>`,
+    )
+    .join('')
 }
 
 const socialLinks = [
@@ -330,7 +349,7 @@ app.innerHTML = `
     <section id="certifications" class="section section-certifications">
       <div class="section-head reveal">
         ${renderSectionHeading('certifications', certifications.heading)}
-        <p>Professional credentials across OutSystems, Microsoft, and agile delivery.</p>
+        <p>OutSystems certifications and specializations, plus Microsoft and agile credentials.</p>
       </div>
       ${renderCertifications()}
     </section>

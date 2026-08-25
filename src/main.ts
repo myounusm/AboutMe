@@ -348,6 +348,9 @@ const socialLinks = [
   profile.resumeUrl
     ? `<a href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>`
     : '',
+  profile.resumeUrlNew
+    ? `<a href="${escapeHtml(profile.resumeUrlNew)}" download>Download new CV</a>`
+    : '',
 ]
   .filter(Boolean)
   .join('')
@@ -388,6 +391,11 @@ app.innerHTML = `
         <div class="hero-actions reveal-hero" style="--d: 4">
           <a class="btn btn-primary" href="#experience">View experience</a>
           <a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>
+          ${
+            profile.resumeUrlNew
+              ? `<a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrlNew)}" download>Download new CV</a>`
+              : ''
+          }
         </div>
       </div>
       <a class="scroll-hint reveal-hero" style="--d: 5" href="#experience" aria-label="Scroll to experience">

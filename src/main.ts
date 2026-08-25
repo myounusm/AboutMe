@@ -251,8 +251,8 @@ app.innerHTML = `
   <header class="site-header">
     <a class="brand" href="#top">${escapeHtml(profile.shortName)}</a>
     <nav class="nav" aria-label="Primary">
-      ${renderNavLink('#work', 'work', 'Work')}
       ${renderNavLink('#experience', 'experience', 'Experience')}
+      ${renderNavLink('#work', 'work', 'Work')}
       ${renderNavLink('#skills', 'skills', 'Skills')}
       ${renderNavLink('#education', 'education', 'Education')}
       ${renderNavLink('#certifications', 'certifications', 'Certifications')}
@@ -278,23 +278,13 @@ app.innerHTML = `
         <p class="hero-tagline reveal-hero" style="--d: 2">${escapeHtml(profile.tagline)}</p>
         <p class="hero-built reveal-hero" style="--d: 3">${escapeHtml(profile.builtWithLine)}</p>
         <div class="hero-actions reveal-hero" style="--d: 4">
-          <a class="btn btn-primary" href="#work">View work</a>
+          <a class="btn btn-primary" href="#experience">View experience</a>
           <a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>
         </div>
       </div>
-      <a class="scroll-hint reveal-hero" style="--d: 5" href="#work" aria-label="Scroll to work">
+      <a class="scroll-hint reveal-hero" style="--d: 5" href="#experience" aria-label="Scroll to experience">
         <span></span>
       </a>
-    </section>
-
-    <section id="work" class="section section-work">
-      <div class="section-head reveal">
-        ${renderSectionHeading('work', 'Selected work')}
-        <p>Recent platforms and integrations delivered in the insurance domain. Flip a card for details.</p>
-      </div>
-      <div class="flash-grid" role="list">
-        ${renderProjects()}
-      </div>
     </section>
 
     <section id="experience" class="section section-experience">
@@ -304,6 +294,16 @@ app.innerHTML = `
       </div>
       <div class="timeline">
         ${renderExperience()}
+      </div>
+    </section>
+
+    <section id="work" class="section section-work">
+      <div class="section-head reveal">
+        ${renderSectionHeading('work', 'Selected work')}
+        <p>Recent platforms and integrations delivered in the insurance domain. Flip a card for details.</p>
+      </div>
+      <div class="flash-grid" role="list">
+        ${renderProjects()}
       </div>
     </section>
 

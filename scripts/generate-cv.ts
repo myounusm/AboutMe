@@ -1,7 +1,7 @@
 /**
  * Builds a print-ready CV PDF from src/content.ts into public/Mohammed_Younus_CV.pdf
  */
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { spawnSync } from 'node:child_process'

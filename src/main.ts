@@ -367,6 +367,7 @@ app.innerHTML = `
       ${renderNavLink('#skills', 'skills', 'Skills')}
       ${renderNavLink('#education', 'education', 'Education')}
       ${renderNavLink('#certifications', 'certifications', 'Certifications')}
+      ${renderNavLink('#insights', 'insights', 'Insights')}
       ${renderNavLink('#about', 'about', 'About')}
       ${renderNavLink('#contact', 'contact', 'Contact')}
     </nav>
@@ -449,6 +450,20 @@ app.innerHTML = `
         <p>OutSystems certifications and specializations, plus Microsoft and agile credentials.</p>
       </div>
       ${renderCertifications()}
+    </section>
+
+    <section id="insights" class="section section-insights">
+      <div class="section-head reveal">
+        ${renderSectionHeading('insights', 'Insights')}
+        <p>Notes on delivery, architecture, and AI-assisted engineering.</p>
+      </div>
+      <div class="coming-soon reveal" role="status" aria-live="polite">
+        <p class="coming-soon-eyebrow">Stay tuned</p>
+        <h3 class="coming-soon-title">Coming soon</h3>
+        <p class="coming-soon-copy">
+          Articles and practical insights from enterprise OutSystems, .NET, and AI-assisted delivery are on the way.
+        </p>
+      </div>
     </section>
 
     <section id="about" class="section section-about">

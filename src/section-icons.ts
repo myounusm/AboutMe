@@ -13,6 +13,7 @@ export type SectionIconId =
   | 'skills'
   | 'education'
   | 'certifications'
+  | 'insights'
   | 'about'
   | 'contact'
 
@@ -22,6 +23,7 @@ const iconPaths: Record<SectionIconId, string> = {
   skills: `<path ${stroke} d="M12 3l1.6 4.2L18 9l-4.4 1.8L12 15l-1.6-4.2L6 9l4.4-1.8L12 3z"/><path ${stroke} d="M5 16.5l.9 2.2L8.2 20l-2.3.9L5 23l-.9-2.1L1.8 20l2.3-.9L5 16.5z"/><path ${stroke} d="M18.5 14.5l.8 1.9 2 .8-2 .8-.8 1.9-.8-1.9-2-.8 2-.8.8-1.9z"/>`,
   education: `<path ${stroke} d="M3 9.5L12 5l9 4.5-9 4.5L3 9.5z"/><path ${stroke} d="M7 12.2v4.1c0 .8 2.2 2.2 5 2.2s5-1.4 5-2.2v-4.1"/><path ${stroke} d="M21 10.2v5.3"/>`,
   certifications: `<circle ${stroke} cx="12" cy="9" r="5.5"/><path ${stroke} d="M9.2 13.8L8 21l4-2.2L16 21l-1.2-7.2"/><path ${stroke} d="M10 9h4M12 7v4"/>`,
+  insights: `<path ${stroke} d="M9 18h6M10 21h4"/><path ${stroke} d="M8.2 15.2A5.8 5.8 0 0 1 7 11.2 5 5 0 0 1 12 6.5a5 5 0 0 1 5 4.7c0 1.6-.6 2.8-1.8 3.9-.5.5-.8 1.1-.8 1.8H10.6c0-.7-.3-1.3-.8-1.8z"/>`,
   about: `<circle ${stroke} cx="12" cy="8" r="3.5"/><path ${stroke} d="M5.5 19.5c1.6-3.2 4-4.8 6.5-4.8s4.9 1.6 6.5 4.8"/>`,
   contact: `<rect ${stroke} x="3.5" y="5.5" width="17" height="13" rx="2"/><path ${stroke} d="M4.5 8l7.5 5.2L19.5 8"/>`,
 }

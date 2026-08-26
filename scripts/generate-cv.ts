@@ -415,6 +415,12 @@ const chrome = chromeCandidates.find((bin) => {
 })
 
 if (!chrome) {
+  if (existsSync(outPdf)) {
+    console.warn(
+      'No Chrome/Chromium found — keeping existing public/Mohammed_Younus_CV.pdf',
+    )
+    process.exit(0)
+  }
   console.error('No Chrome/Chromium binary found to print PDF.')
   process.exit(1)
 }

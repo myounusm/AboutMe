@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run cv:pdf && tsc && vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "cv:pdf": "tsx scripts/generate-cv.ts"
   },

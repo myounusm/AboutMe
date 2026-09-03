@@ -349,7 +349,7 @@ const socialLinks = [
     ? `<a href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>`
     : '',
   profile.resumeUrlNew
-    ? `<a href="${escapeHtml(profile.resumeUrlNew)}" download>Download new CV</a>`
+    ? `<a href="${escapeHtml(profile.resumeUrlNew)}" download>Download Word CV</a>`
     : '',
 ]
   .filter(Boolean)
@@ -394,7 +394,7 @@ app.innerHTML = `
           <a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>
           ${
             profile.resumeUrlNew
-              ? `<a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrlNew)}" download>Download new CV</a>`
+              ? `<a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrlNew)}" download>Download Word CV</a>`
               : ''
           }
         </div>

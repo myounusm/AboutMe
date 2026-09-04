@@ -47,7 +47,7 @@ const highlightLimitFor = (index: number, total: number) => {
 
 const sectionHeading = (text: string) =>
   new Paragraph({
-    spacing: { before: 220, after: 80 },
+    spacing: { before: 240, after: 100 },
     border: {
       bottom: { style: BorderStyle.SINGLE, size: 12, color: seaDeep, space: 4 },
     },
@@ -55,7 +55,7 @@ const sectionHeading = (text: string) =>
       new TextRun({
         text: text.toUpperCase(),
         bold: true,
-        size: 20,
+        size: 26,
         font: 'Calibri',
         color: seaDeep,
         allCaps: true,
@@ -69,7 +69,7 @@ const bodyPara = (text: string, opts?: { before?: number; after?: number; size?:
     children: [
       new TextRun({
         text,
-        size: opts?.size ?? 18,
+        size: opts?.size ?? 24,
         font: 'Calibri',
         color: ink,
       }),
@@ -78,11 +78,11 @@ const bodyPara = (text: string, opts?: { before?: number; after?: number; size?:
 
 const bullet = (text: string) =>
   new Paragraph({
-    spacing: { before: 20, after: 20 },
+    spacing: { before: 30, after: 30 },
     indent: { left: 280 },
     children: [
-      new TextRun({ text: '•  ', size: 18, font: 'Calibri', color: sea }),
-      new TextRun({ text, size: 18, font: 'Calibri', color: ink }),
+      new TextRun({ text: '•  ', size: 24, font: 'Calibri', color: sea }),
+      new TextRun({ text, size: 24, font: 'Calibri', color: ink }),
     ],
   })
 
@@ -93,7 +93,7 @@ const children: Paragraph[] = [
       new TextRun({
         text: profile.name,
         bold: true,
-        size: 36,
+        size: 40,
         font: 'Calibri',
         color: seaDeep,
       }),
@@ -105,7 +105,7 @@ const children: Paragraph[] = [
       new TextRun({
         text: `${profile.title} · Software Development`,
         bold: true,
-        size: 22,
+        size: 26,
         font: 'Calibri',
         color: sea,
       }),
@@ -116,7 +116,7 @@ const children: Paragraph[] = [
     children: [
       new TextRun({
         text: profile.tagline,
-        size: 18,
+        size: 24,
         font: 'Calibri',
         color: inkSoft,
       }),
@@ -134,7 +134,7 @@ const children: Paragraph[] = [
           'github.com/myounusm',
           'myounusm.in',
         ].join('  ·  '),
-        size: 16,
+        size: 20,
         font: 'Calibri',
         color: inkSoft,
       }),
@@ -151,19 +151,19 @@ for (const [index, job] of experience.entries()) {
   const limit = highlightLimitFor(index, job.highlights.length)
   children.push(
     new Paragraph({
-      spacing: { before: 140, after: 20 },
+      spacing: { before: 160, after: 20 },
       children: [
         new TextRun({
           text: job.role,
           bold: true,
-          size: 20,
+          size: 26,
           font: 'Calibri',
           color: ink,
         }),
         new TextRun({
           text: `    ${job.period}`,
           bold: true,
-          size: 16,
+          size: 22,
           font: 'Calibri',
           color: sea,
         }),
@@ -174,7 +174,7 @@ for (const [index, job] of experience.entries()) {
       children: [
         new TextRun({
           text: job.company.replace(/\s*\|\s*/g, ' · '),
-          size: 17,
+          size: 22,
           font: 'Calibri',
           color: inkSoft,
         }),
@@ -183,7 +183,7 @@ for (const [index, job] of experience.entries()) {
   )
 
   if (job.summary && index <= 3) {
-    children.push(bodyPara(job.summary, { size: 17, before: 20, after: 40 }))
+    children.push(bodyPara(job.summary, { size: 24, before: 20, after: 40 }))
   }
 
   for (const highlight of job.highlights.slice(0, limit)) {
@@ -199,13 +199,13 @@ for (const [index, job] of experience.entries()) {
           new TextRun({
             text: 'Stack: ',
             bold: true,
-            size: 15,
+            size: 20,
             font: 'Calibri',
             color: seaDeep,
           }),
           new TextRun({
             text: job.techStack,
-            size: 15,
+            size: 20,
             font: 'Calibri',
             color: seaDeep,
           }),
@@ -224,13 +224,13 @@ for (const group of skills.groups) {
         new TextRun({
           text: `${group.label}: `,
           bold: true,
-          size: 17,
+          size: 22,
           font: 'Calibri',
           color: sea,
         }),
         new TextRun({
           text: group.items.join(' · '),
-          size: 17,
+          size: 22,
           font: 'Calibri',
           color: ink,
         }),
@@ -245,13 +245,13 @@ children.push(
       new TextRun({
         text: 'Core strengths: ',
         bold: true,
-        size: 16,
+        size: 22,
         font: 'Calibri',
         color: seaDeep,
       }),
       new TextRun({
         text: skills.coreStrengths,
-        size: 16,
+        size: 22,
         font: 'Calibri',
         color: inkSoft,
       }),
@@ -268,19 +268,19 @@ for (const project of projects) {
         new TextRun({
           text: project.name,
           bold: true,
-          size: 17,
+          size: 22,
           font: 'Calibri',
           color: ink,
         }),
         new TextRun({
           text: `  ·  ${project.year}  ·  ${project.stack.join(' · ')}`,
-          size: 15,
+          size: 20,
           font: 'Calibri',
           color: sea,
         }),
       ],
     }),
-    bodyPara(project.description, { size: 16, before: 10, after: 30 }),
+    bodyPara(project.description, { size: 22, before: 10, after: 30 }),
   )
 }
 
@@ -293,7 +293,7 @@ for (const item of education) {
         new TextRun({
           text: item.degree,
           bold: true,
-          size: 18,
+          size: 24,
           font: 'Calibri',
           color: ink,
         }),
@@ -304,7 +304,7 @@ for (const item of education) {
       children: [
         new TextRun({
           text: `${item.school} · ${item.period}`,
-          size: 16,
+          size: 22,
           font: 'Calibri',
           color: inkSoft,
         }),
@@ -322,7 +322,7 @@ for (const group of certifications.groups) {
         new TextRun({
           text: group.label,
           bold: true,
-          size: 16,
+          size: 22,
           font: 'Calibri',
           color: sea,
         }),
@@ -335,7 +335,7 @@ for (const group of certifications.groups) {
           text: group.items
             .map((item) => (item.since ? `${item.name} (${item.since})` : item.name))
             .join(' · '),
-          size: 16,
+          size: 22,
           font: 'Calibri',
           color: ink,
         }),
@@ -351,7 +351,7 @@ children.push(
     children: [
       new TextRun({
         text: `Curriculum Vitae generated from ${website} · ${profile.name}`,
-        size: 14,
+        size: 18,
         font: 'Calibri',
         color: inkSoft,
         italics: true,

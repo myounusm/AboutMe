@@ -61,8 +61,8 @@ const html = `<!DOCTYPE html>
       padding: 0;
       color: var(--ink);
       font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-      font-size: 8.7pt;
-      line-height: 1.32;
+      font-size: 12pt;
+      line-height: 1.35;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }

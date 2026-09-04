@@ -265,15 +265,6 @@ const html = `<!DOCTYPE html>
       font-size: 7.7pt;
     }
 
-    .footer-note {
-      margin-top: 0.85rem;
-      padding-top: 0.4rem;
-      border-top: 1px solid var(--line);
-      font-size: 7.6pt;
-      color: var(--ink-soft);
-      text-align: center;
-    }
-
     .cert-page {
       page-break-before: always;
       margin: 0;
@@ -455,8 +446,6 @@ const html = `<!DOCTYPE html>
         </div>
       </div>
     </section>
-
-    <p class="footer-note">Curriculum Vitae generated from ${website} · ${escapeHtml(profile.name)}</p>
   </div>
 
   <div class="sheet cert-page">

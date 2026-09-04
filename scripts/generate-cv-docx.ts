@@ -34,7 +34,6 @@ const outDocx = join(root, 'public', 'Mohammed_Younus_CV.docx')
 const badgesDir = join(root, 'public', 'certificates', 'badges')
 const outSystemsRed = 'E4002B'
 
-const website = 'https://www.myounusm.in'
 const seaDeep = '0F4D48'
 const sea = '1A6B63'
 const inkSoft = '3A4D57'
@@ -344,22 +343,6 @@ for (const group of certifications.groups) {
     }),
   )
 }
-
-children.push(
-  new Paragraph({
-    spacing: { before: 280 },
-    alignment: AlignmentType.CENTER,
-    children: [
-      new TextRun({
-        text: `Curriculum Vitae generated from ${website} · ${profile.name}`,
-        size: 18,
-        font: 'Calibri',
-        color: inkSoft,
-        italics: true,
-      }),
-    ],
-  }),
-)
 
 type TimelineCert = {
   name: string

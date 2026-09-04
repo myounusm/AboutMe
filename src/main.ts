@@ -350,6 +350,45 @@ function renderCertifications(): string {
     </div>`
 }
 
+function renderDownloadMenu(variant: 'hero' | 'inline' = 'hero'): string {
+  const wordUrl = profile.resumeUrlWord
+  const pdfUrl = profile.resumeUrlPdf
+  if (!wordUrl && !pdfUrl) return ''
+
+  const toggleClass =
+    variant === 'hero' ? 'btn btn-ghost download-menu-toggle' : 'download-menu-toggle download-menu-toggle-inline'
+  const menuClass =
+    variant === 'hero' ? 'download-menu download-menu-hero' : 'download-menu download-menu-inline'
+
+  return `
+    <div class="${menuClass}" data-download-menu>
+      <button
+        type="button"
+        class="${toggleClass}"
+        aria-expanded="false"
+        aria-haspopup="menu"
+        data-download-toggle
+      >
+        <span>Download CV</span>
+        <svg class="download-menu-caret" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path d="M4.2 6.2L8 10l3.8-3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="download-menu-panel" role="menu" hidden data-download-panel>
+        ${
+          wordUrl
+            ? `<a class="download-menu-item" role="menuitem" href="${escapeHtml(wordUrl)}" download>Word (.docx)</a>`
+            : ''
+        }
+        ${
+          pdfUrl
+            ? `<a class="download-menu-item" role="menuitem" href="${escapeHtml(pdfUrl)}" download>PDF</a>`
+            : ''
+        }
+      </div>
+    </div>`
+}
+
 const socialLinks = [
   profile.github
     ? `<a href="${escapeHtml(profile.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>`
@@ -361,12 +400,7 @@ const socialLinks = [
     ? `<a href="tel:${escapeHtml(profile.phone.replace(/\s+/g, ''))}">Call</a>`
     : '',
   `<a href="mailto:${escapeHtml(profile.email)}">Email</a>`,
-  profile.resumeUrl
-    ? `<a href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>`
-    : '',
-  profile.resumeUrlNew
-    ? `<a href="${escapeHtml(profile.resumeUrlNew)}" download>Download Word CV</a>`
-    : '',
+  renderDownloadMenu('inline'),
 ]
   .filter(Boolean)
   .join('')
@@ -407,12 +441,7 @@ app.innerHTML = `
         <p class="hero-built reveal-hero" style="--d: 3">${escapeHtml(profile.builtWithLine)}</p>
         <div class="hero-actions reveal-hero" style="--d: 4">
           <a class="btn btn-primary" href="#experience">View experience</a>
-          <a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrl)}" download>Download CV</a>
-          ${
-            profile.resumeUrlNew
-              ? `<a class="btn btn-ghost" href="${escapeHtml(profile.resumeUrlNew)}" download>Download Word CV</a>`
-              : ''
-          }
+          ${renderDownloadMenu('hero')}
         </div>
       </div>
       <a class="scroll-hint reveal-hero" style="--d: 5" href="#experience" aria-label="Scroll to experience">
@@ -851,6 +880,47 @@ function initSkillsMindmap(): void {
   })
 }
 
+function initDownloadMenus(): void {
+  const menus = Array.from(document.querySelectorAll<HTMLElement>('[data-download-menu]'))
+  if (!menus.length) return
+
+  const setOpen = (menu: HTMLElement, open: boolean) => {
+    const toggle = menu.querySelector<HTMLButtonElement>('[data-download-toggle]')
+    const panel = menu.querySelector<HTMLElement>('[data-download-panel]')
+    if (!toggle || !panel) return
+    menu.classList.toggle('is-open', open)
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
+    panel.hidden = !open
+  }
+
+  const closeAll = (except?: HTMLElement) => {
+    menus.forEach((menu) => {
+      if (menu !== except) setOpen(menu, false)
+    })
+  }
+
+  menus.forEach((menu) => {
+    const toggle = menu.querySelector<HTMLButtonElement>('[data-download-toggle]')
+    if (!toggle) return
+
+    toggle.addEventListener('click', (event) => {
+      event.stopPropagation()
+      const nextOpen = !menu.classList.contains('is-open')
+      closeAll(nextOpen ? menu : undefined)
+      setOpen(menu, nextOpen)
+    })
+
+    menu.querySelectorAll<HTMLAnchorElement>('.download-menu-item').forEach((item) => {
+      item.addEventListener('click', () => setOpen(menu, false))
+    })
+  })
+
+  document.addEventListener('click', () => closeAll())
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeAll()
+  })
+}
+
 requestAnimationFrame(() => {
   document.body.classList.add('is-ready')
   initReveal()
@@ -860,4 +930,5 @@ requestAnimationFrame(() => {
   initExperienceTabs()
   initSkillsMindmap()
   initActiveNav()
+  initDownloadMenus()
 })

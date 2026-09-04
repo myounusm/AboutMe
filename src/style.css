@@ -303,6 +303,105 @@ code {
   background: rgba(244, 247, 246, 0.12);
 }
 
+.download-menu {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.download-menu-toggle {
+  gap: 0.45rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.download-menu-toggle-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: inherit;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+
+.download-menu-toggle-inline:hover,
+.download-menu-toggle-inline:focus-visible,
+.download-menu-inline.is-open .download-menu-toggle-inline {
+  color: var(--sea-deep);
+  border-bottom-color: var(--sea);
+}
+
+.download-menu-caret {
+  width: 0.9rem;
+  height: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.download-menu.is-open .download-menu-caret {
+  transform: rotate(180deg);
+}
+
+.download-menu-panel {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  z-index: 20;
+  min-width: 100%;
+  padding: 0.35rem;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(20, 35, 43, 0.12);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 14px 34px rgba(20, 35, 43, 0.16);
+  display: grid;
+  gap: 0.2rem;
+}
+
+.download-menu-hero .download-menu-panel {
+  border-color: rgba(244, 247, 246, 0.22);
+  background: rgba(15, 32, 38, 0.96);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+.download-menu-inline .download-menu-panel {
+  left: auto;
+  right: 0;
+  min-width: 10.5rem;
+}
+
+.download-menu-item {
+  display: block;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.download-menu-hero .download-menu-item {
+  color: #f4f7f6;
+}
+
+.download-menu-item:hover,
+.download-menu-item:focus-visible {
+  background: rgba(26, 107, 99, 0.12);
+  color: var(--sea-deep);
+  outline: none;
+}
+
+.download-menu-hero .download-menu-item:hover,
+.download-menu-hero .download-menu-item:focus-visible {
+  background: rgba(244, 247, 246, 0.12);
+  color: #fff;
+}
+
 .scroll-hint {
   position: absolute;
   z-index: 1;
@@ -2161,7 +2260,13 @@ code {
     align-items: stretch;
   }
 
-  .btn {
+  .hero-actions .btn,
+  .hero-actions .download-menu,
+  .hero-actions .download-menu-toggle {
+    width: 100%;
+  }
+
+  .hero-actions .download-menu-panel {
     width: 100%;
   }
 

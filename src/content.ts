@@ -16,8 +16,8 @@ export interface Profile {
   linkedin: string
   photoUrl: string
   photoAlt: string
-  resumeUrl: string
-  resumeUrlNew?: string
+  resumeUrlWord: string
+  resumeUrlPdf: string
   heroImage: string
   heroImageAlt: string
 }
@@ -126,8 +126,8 @@ export const profile: Profile = {
   linkedin: 'https://www.linkedin.com/in/myounusm/',
   photoUrl: './profile.jpg',
   photoAlt: 'Portrait of Mohammed Younus Mohiuddin',
-  resumeUrl: './Younus_CV.pdf',
-  resumeUrlNew: './Mohammed_Younus_CV.docx',
+  resumeUrlWord: './Mohammed_Younus_CV.docx',
+  resumeUrlPdf: './Mohammed_Younus_CV.pdf',
   heroImage:
     'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80',
   heroImageAlt: 'Sunlit modern workspace with glass and soft architecture',

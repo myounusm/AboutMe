@@ -295,43 +295,59 @@ function renderEducation(): string {
 }
 
 function renderCertifications(): string {
-  return certifications.groups
+  const timelineItems = certifications.timeline
     .map(
-      (group) => `
-      <div class="cert-group reveal">
-        <div class="cert-group-head">
-          ${
-            group.logo
-              ? `<img
-                  class="cert-group-logo"
-                  src="${escapeHtml(group.logo)}"
-                  alt="${escapeHtml(group.logoAlt ?? '')}"
-                  width="140"
-                  height="32"
-                  loading="lazy"
-                />`
-              : ''
-          }
-          <h3 class="cert-group-label">${escapeHtml(group.label)}</h3>
+      (cert, index) => `
+      <li class="cert-timeline-item reveal" style="--i: ${index}">
+        <time class="cert-timeline-date" datetime="${escapeHtml(cert.date)}">${escapeHtml(cert.date)}</time>
+        <div class="cert-timeline-marker" aria-hidden="true"></div>
+        <img
+          class="cert-timeline-badge"
+          src="${escapeHtml(cert.badge)}"
+          alt="${escapeHtml(cert.name)} badge"
+          width="72"
+          height="80"
+          loading="lazy"
+        />
+        <div class="cert-timeline-body">
+          <p class="cert-timeline-date-inline">${escapeHtml(cert.date)}</p>
+          <h3 class="cert-timeline-name">${escapeHtml(cert.name)}</h3>
+          <p class="cert-timeline-meta">${escapeHtml(cert.level)} · ${escapeHtml(cert.track)} · ${escapeHtml(cert.platform)}</p>
+          <p class="cert-timeline-highlight">${escapeHtml(cert.highlight)}</p>
         </div>
-        <ul class="cert-grid">
-          ${group.items
-            .map(
-              (item) => `
-            <li class="cert-card">
-              <p class="cert-name">${escapeHtml(item.name)}</p>
-              ${
-                item.since
-                  ? `<p class="cert-since">Since ${escapeHtml(item.since)}</p>`
-                  : ''
-              }
-            </li>`,
-            )
-            .join('')}
-        </ul>
-      </div>`,
+      </li>`,
     )
     .join('')
+
+  const additional = certifications.additional
+    .map((item) => `<li>${escapeHtml(item.name)}</li>`)
+    .join('')
+
+  return `
+    <div class="cert-journey reveal">
+      <div class="cert-journey-head">
+        <img
+          class="cert-group-logo"
+          src="./logos/outsystems.svg"
+          alt="OutSystems logo"
+          width="140"
+          height="32"
+          loading="lazy"
+        />
+        <div>
+          <h3 class="cert-journey-title">${escapeHtml(certifications.journeyTitle)}</h3>
+          <p class="cert-journey-meta">${escapeHtml(certifications.journeyMeta)}</p>
+        </div>
+      </div>
+      <p class="cert-journey-lead">${escapeHtml(certifications.journeyLead)}</p>
+    </div>
+    <ol class="cert-timeline">
+      ${timelineItems}
+    </ol>
+    <div class="cert-additional reveal">
+      <h3 class="cert-group-label">Additional credentials</h3>
+      <ul class="cert-additional-list">${additional}</ul>
+    </div>`
 }
 
 const socialLinks = [
@@ -447,7 +463,7 @@ app.innerHTML = `
     <section id="certifications" class="section section-certifications">
       <div class="section-head reveal">
         ${renderSectionHeading('certifications', certifications.heading)}
-        <p>OutSystems certifications and specializations, plus Microsoft and agile credentials.</p>
+        <p>${escapeHtml(certifications.lead)}</p>
       </div>
       ${renderCertifications()}
     </section>

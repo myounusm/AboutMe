@@ -82,8 +82,25 @@ export interface CertificationGroup {
   logoAlt?: string
 }
 
+export interface CertificationTimelineItem {
+  name: string
+  date: string
+  platform: string
+  level: string
+  track: string
+  badge: string
+  highlight: string
+}
+
 export interface Certifications {
   heading: string
+  lead: string
+  journeyTitle: string
+  journeyMeta: string
+  journeyLead: string
+  timeline: CertificationTimelineItem[]
+  additional: CertificationItem[]
+  /** Compact grouped list used in the multi-column CV body. */
   groups: CertificationGroup[]
 }
 
@@ -120,7 +137,7 @@ export const about: About = {
   heading: 'About',
   lead:
     'Always ready to learn new technologies and adapt to evolving challenges.',
-  body: `Tech Lead with 21+ years of software development experience across the insurance, aviation, and software industries. Holds 12 OutSystems certifications, including Professional Developer and Architecture Specialist, and is certified in Microsoft Azure AI.
+  body: `Tech Lead with 21+ years of software development experience across the insurance, aviation, and software industries. Holds 13 OutSystems certifications, including Professional Developer and Architecture Specialist, and is certified in Microsoft Azure AI.
 
 Expert in enterprise solution design, digital transformation, and building scalable, high-performance systems — from architecture and integrations to mentoring teams and engaging business stakeholders.`,
 }
@@ -419,6 +436,135 @@ export const education: EducationItem[] = [
 
 export const certifications: Certifications = {
   heading: 'Certifications',
+  lead: 'Official OutSystems certification journey with badges from the transcript — plus Microsoft and agile credentials.',
+  journeyTitle: 'OutSystems Certification Journey',
+  journeyMeta: '13 certifications  ·  O11 + ODC  ·  Jun 2023 → Jan 2026',
+  journeyLead:
+    'Progressed from Associate Developer to Architecture Specialist and Tech Lead across OutSystems 11 and OutSystems Developer Cloud — spanning core development, mobile, security, platform operations, and architecture.',
+  timeline: [
+    {
+      name: 'Architecture Specialist (ODC)',
+      date: 'Jan 17, 2026',
+      platform: 'ODC',
+      level: 'Specialist',
+      track: 'Architecture',
+      badge: './certificates/badges/architecture-odc.png',
+      highlight: 'Cloud-native architecture design for OutSystems Developer Cloud',
+    },
+    {
+      name: 'Platform Ops (O11)',
+      date: 'Jun 24, 2025',
+      platform: 'O11',
+      level: 'Ops',
+      track: 'Platform Operations',
+      badge: './certificates/badges/platform-ops.png',
+      highlight: 'LifeTime governance, environments, releases, and platform reliability',
+    },
+    {
+      name: 'Tech Lead (O11)',
+      date: 'Jun 18, 2025',
+      platform: 'O11',
+      level: 'Tech Lead',
+      track: 'Leadership',
+      badge: './certificates/badges/tech-lead.png',
+      highlight: 'Technical leadership, standards, mentoring, and delivery ownership',
+    },
+    {
+      name: 'Web Developer Specialist (ODC)',
+      date: 'Dec 28, 2024',
+      platform: 'ODC',
+      level: 'Specialist',
+      track: 'Web Development',
+      badge: './certificates/badges/web-specialist-odc.png',
+      highlight: 'Advanced ODC web application patterns and specialist-level delivery',
+    },
+    {
+      name: 'Associate Traditional Web Developer (O11)',
+      date: 'Jun 27, 2024',
+      platform: 'O11',
+      level: 'Associate',
+      track: 'Traditional Web',
+      badge: './certificates/badges/associate-traditional.png',
+      highlight: 'Traditional Web skills complementing Reactive/ODC delivery',
+    },
+    {
+      name: 'Architecture Specialist (O11)',
+      date: 'Nov 03, 2023',
+      platform: 'O11',
+      level: 'Specialist',
+      track: 'Architecture',
+      badge: './certificates/badges/architecture-o11.png',
+      highlight: 'Enterprise architecture, module design, and long-term maintainability',
+    },
+    {
+      name: 'Professional Web Developer (O11)',
+      date: 'Nov 03, 2023',
+      platform: 'O11',
+      level: 'Professional',
+      track: 'Web Development',
+      badge: './certificates/badges/professional-web.png',
+      highlight: 'Professional-grade Reactive/Web application development',
+    },
+    {
+      name: 'Professional Mobile Developer (O11)',
+      date: 'Nov 03, 2023',
+      platform: 'O11',
+      level: 'Professional',
+      track: 'Mobile Development',
+      badge: './certificates/badges/professional-mobile.png',
+      highlight: 'Mobile delivery with professional OutSystems mobile patterns',
+    },
+    {
+      name: 'Security Specialist (O11 and ODC)',
+      date: 'Sep 13, 2023',
+      platform: 'O11 & ODC',
+      level: 'Specialist',
+      track: 'Security',
+      badge: './certificates/badges/security-specialist.png',
+      highlight: 'Secure design, authentication, and platform security best practices',
+    },
+    {
+      name: 'Web Developer Specialist (O11)',
+      date: 'Aug 25, 2023',
+      platform: 'O11',
+      level: 'Specialist',
+      track: 'Web Development',
+      badge: './certificates/badges/web-specialist-o11.png',
+      highlight: 'Specialist web patterns beyond professional developer baseline',
+    },
+    {
+      name: 'Associate Developer (ODC)',
+      date: 'Jul 24, 2023',
+      platform: 'ODC',
+      level: 'Associate',
+      track: 'Core Development',
+      badge: './certificates/badges/associate-odc.png',
+      highlight: 'Foundational OutSystems Developer Cloud capability',
+    },
+    {
+      name: 'Mobile Developer Specialist (O11 and ODC)',
+      date: 'Jul 13, 2023',
+      platform: 'O11 & ODC',
+      level: 'Specialist',
+      track: 'Mobile Development',
+      badge: './certificates/badges/mobile-specialist.png',
+      highlight: 'Cross-platform mobile specialist skills on O11 and ODC',
+    },
+    {
+      name: 'Associate Developer (O11)',
+      date: 'Jun 10, 2023',
+      platform: 'O11',
+      level: 'Associate',
+      track: 'Core Development',
+      badge: './certificates/badges/associate-o11.png',
+      highlight: 'Entry point of the OutSystems certification journey',
+    },
+  ],
+  additional: [
+    { name: 'Microsoft Certified: Azure AI Fundamentals' },
+    { name: 'Microsoft 365 Certified: Fundamentals' },
+    { name: 'SCRUM Fundamentals' },
+  ],
   groups: [
     {
       label: 'OutSystems Certifications',

@@ -364,7 +364,6 @@ children.push(
 type TimelineCert = {
   name: string
   date: string
-  sortKey: string
   platform: string
   level: string
   track: string
@@ -372,138 +371,15 @@ type TimelineCert = {
   highlight: string
 }
 
-const outSystemsTimeline: TimelineCert[] = [
-  {
-    name: 'Architecture Specialist (ODC)',
-    date: 'Jan 17, 2026',
-    sortKey: '2026-01-17',
-    platform: 'ODC',
-    level: 'Specialist',
-    track: 'Architecture',
-    badge: 'architecture.png',
-    highlight: 'Cloud-native architecture design for OutSystems Developer Cloud',
-  },
-  {
-    name: 'Platform Ops (O11)',
-    date: 'Jun 24, 2025',
-    sortKey: '2025-06-24',
-    platform: 'O11',
-    level: 'Ops',
-    track: 'Platform Operations',
-    badge: 'platform-ops.png',
-    highlight: 'LifeTime governance, environments, releases, and platform reliability',
-  },
-  {
-    name: 'Tech Lead (O11)',
-    date: 'Jun 18, 2025',
-    sortKey: '2025-06-18',
-    platform: 'O11',
-    level: 'Tech Lead',
-    track: 'Leadership',
-    badge: 'tech-lead.png',
-    highlight: 'Technical leadership, standards, mentoring, and delivery ownership',
-  },
-  {
-    name: 'Web Developer Specialist (ODC)',
-    date: 'Dec 28, 2024',
-    sortKey: '2024-12-28',
-    platform: 'ODC',
-    level: 'Specialist',
-    track: 'Web Development',
-    badge: 'web-specialist.png',
-    highlight: 'Advanced ODC web application patterns and specialist-level delivery',
-  },
-  {
-    name: 'Associate Traditional Web Developer (O11)',
-    date: 'Jun 27, 2024',
-    sortKey: '2024-06-27',
-    platform: 'O11',
-    level: 'Associate',
-    track: 'Traditional Web',
-    badge: 'associate-traditional.png',
-    highlight: 'Traditional Web skills complementing Reactive/ODC delivery',
-  },
-  {
-    name: 'Architecture Specialist (O11)',
-    date: 'Nov 03, 2023',
-    sortKey: '2023-11-03-a',
-    platform: 'O11',
-    level: 'Specialist',
-    track: 'Architecture',
-    badge: 'architecture.png',
-    highlight: 'Enterprise architecture, module design, and long-term maintainability',
-  },
-  {
-    name: 'Professional Web Developer (O11)',
-    date: 'Nov 03, 2023',
-    sortKey: '2023-11-03-b',
-    platform: 'O11',
-    level: 'Professional',
-    track: 'Web Development',
-    badge: 'professional-web.png',
-    highlight: 'Professional-grade Reactive/Web application development',
-  },
-  {
-    name: 'Professional Mobile Developer (O11)',
-    date: 'Nov 03, 2023',
-    sortKey: '2023-11-03-c',
-    platform: 'O11',
-    level: 'Professional',
-    track: 'Mobile Development',
-    badge: 'professional-mobile.png',
-    highlight: 'Mobile delivery with professional OutSystems mobile patterns',
-  },
-  {
-    name: 'Security Specialist (O11 and ODC)',
-    date: 'Sep 13, 2023',
-    sortKey: '2023-09-13',
-    platform: 'O11 & ODC',
-    level: 'Specialist',
-    track: 'Security',
-    badge: 'security-specialist.png',
-    highlight: 'Secure design, authentication, and platform security best practices',
-  },
-  {
-    name: 'Web Developer Specialist (O11)',
-    date: 'Aug 25, 2023',
-    sortKey: '2023-08-25',
-    platform: 'O11',
-    level: 'Specialist',
-    track: 'Web Development',
-    badge: 'web-specialist.png',
-    highlight: 'Specialist web patterns beyond professional developer baseline',
-  },
-  {
-    name: 'Associate Developer (ODC)',
-    date: 'Jul 24, 2023',
-    sortKey: '2023-07-24',
-    platform: 'ODC',
-    level: 'Associate',
-    track: 'Core Development',
-    badge: 'associate.png',
-    highlight: 'Foundational OutSystems Developer Cloud capability',
-  },
-  {
-    name: 'Mobile Developer Specialist (O11 and ODC)',
-    date: 'Jul 13, 2023',
-    sortKey: '2023-07-13',
-    platform: 'O11 & ODC',
-    level: 'Specialist',
-    track: 'Mobile Development',
-    badge: 'mobile-specialist.png',
-    highlight: 'Cross-platform mobile specialist skills on O11 and ODC',
-  },
-  {
-    name: 'Associate Developer (O11)',
-    date: 'Jun 10, 2023',
-    sortKey: '2023-06-10',
-    platform: 'O11',
-    level: 'Associate',
-    track: 'Core Development',
-    badge: 'associate.png',
-    highlight: 'Entry point of the OutSystems certification journey',
-  },
-]
+const outSystemsTimeline: TimelineCert[] = certifications.timeline.map((cert) => ({
+  name: cert.name,
+  date: cert.date,
+  platform: cert.platform,
+  level: cert.level,
+  track: cert.track,
+  badge: cert.badge.replace('./certificates/badges/', ''),
+  highlight: cert.highlight,
+}))
 
 const noBorder = {
   top: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
@@ -659,7 +535,7 @@ const timelineIntro: Paragraph[] = [
     spacing: { after: 60 },
     children: [
       new TextRun({
-        text: 'OutSystems Certification Journey',
+        text: certifications.journeyTitle,
         bold: true,
         size: 28,
         font: 'Calibri',
@@ -671,7 +547,7 @@ const timelineIntro: Paragraph[] = [
     spacing: { after: 40 },
     children: [
       new TextRun({
-        text: '13 certifications  ·  O11 + ODC  ·  Jun 2023 → Jan 2026',
+        text: certifications.journeyMeta,
         bold: true,
         size: 20,
         font: 'Calibri',
@@ -683,8 +559,7 @@ const timelineIntro: Paragraph[] = [
     spacing: { after: 160 },
     children: [
       new TextRun({
-        text:
-          'Progressed from Associate Developer to Architecture Specialist and Tech Lead across OutSystems 11 and OutSystems Developer Cloud — spanning core development, mobile, security, platform operations, and architecture.',
+        text: certifications.journeyLead,
         size: 20,
         font: 'Calibri',
         color: inkSoft,

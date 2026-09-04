@@ -460,27 +460,20 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="sheet cert-page">
-    <h2 class="timeline-title">OutSystems Certification Journey</h2>
-    <p class="timeline-meta">13 certifications · O11 + ODC · Jun 2023 → Jan 2026</p>
-    <p class="timeline-lead">
-      Progressed from Associate Developer to Architecture Specialist and Tech Lead across
-      OutSystems 11 and OutSystems Developer Cloud — spanning core development, mobile,
-      security, platform operations, and architecture.
-    </p>
+    <h2 class="timeline-title">${escapeHtml(certifications.journeyTitle)}</h2>
+    <p class="timeline-meta">${escapeHtml(certifications.journeyMeta)}</p>
+    <p class="timeline-lead">${escapeHtml(certifications.journeyLead)}</p>
     <ol class="cert-timeline">
-      <li><strong>Architecture Specialist (ODC)</strong> <span>Jan 17, 2026</span><em>Specialist · Architecture · ODC</em></li>
-      <li><strong>Platform Ops (O11)</strong> <span>Jun 24, 2025</span><em>Ops · Platform Operations · O11</em></li>
-      <li><strong>Tech Lead (O11)</strong> <span>Jun 18, 2025</span><em>Tech Lead · Leadership · O11</em></li>
-      <li><strong>Web Developer Specialist (ODC)</strong> <span>Dec 28, 2024</span><em>Specialist · Web Development · ODC</em></li>
-      <li><strong>Associate Traditional Web Developer (O11)</strong> <span>Jun 27, 2024</span><em>Associate · Traditional Web · O11</em></li>
-      <li><strong>Architecture Specialist (O11)</strong> <span>Nov 03, 2023</span><em>Specialist · Architecture · O11</em></li>
-      <li><strong>Professional Web Developer (O11)</strong> <span>Nov 03, 2023</span><em>Professional · Web Development · O11</em></li>
-      <li><strong>Professional Mobile Developer (O11)</strong> <span>Nov 03, 2023</span><em>Professional · Mobile Development · O11</em></li>
-      <li><strong>Security Specialist (O11 and ODC)</strong> <span>Sep 13, 2023</span><em>Specialist · Security · O11 &amp; ODC</em></li>
-      <li><strong>Web Developer Specialist (O11)</strong> <span>Aug 25, 2023</span><em>Specialist · Web Development · O11</em></li>
-      <li><strong>Associate Developer (ODC)</strong> <span>Jul 24, 2023</span><em>Associate · Core Development · ODC</em></li>
-      <li><strong>Mobile Developer Specialist (O11 and ODC)</strong> <span>Jul 13, 2023</span><em>Specialist · Mobile Development · O11 &amp; ODC</em></li>
-      <li><strong>Associate Developer (O11)</strong> <span>Jun 10, 2023</span><em>Associate · Core Development · O11</em></li>
+      ${certifications.timeline
+        .map(
+          (cert) => `
+      <li>
+        <strong>${escapeHtml(cert.name)}</strong>
+        <span>${escapeHtml(cert.date)}</span>
+        <em>${escapeHtml(cert.level)} · ${escapeHtml(cert.track)} · ${escapeHtml(cert.platform)}</em>
+      </li>`,
+        )
+        .join('')}
     </ol>
   </div>
 </body>

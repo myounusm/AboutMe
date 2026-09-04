@@ -276,18 +276,20 @@ const html = `<!DOCTYPE html>
 
     .cert-page {
       page-break-before: always;
-      margin-top: 0.5rem;
-      text-align: center;
-    }
-    .cert-page h2 {
-      margin: 0 0 0.6rem;
-      font-size: 12pt;
-      color: var(--sea-deep);
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 277mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .cert-page img {
       width: 100%;
-      max-width: 170mm;
       height: auto;
+      max-height: 277mm;
+      object-fit: contain;
+      display: block;
     }
   </style>
 </head>
@@ -414,7 +416,6 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="sheet cert-page">
-    <h2>OutSystems Certifications</h2>
     <img
       src="../public/certificates/outsystems-certifications.png"
       alt="OutSystems consolidated certifications certificate for Mohammed Younus Mohiuddin"

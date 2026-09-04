@@ -361,8 +361,12 @@ children.push(
 )
 
 const certImage = readFileSync(certImagePath)
-// Fit certificate on a portrait page while preserving 1090×1550 aspect ratio.
-const certWidth = 520
+// A4 content area with tight margins, preserve 1090×1550 aspect ratio.
+const a4WidthTwips = 11906
+const a4HeightTwips = 16838
+const certMarginTwips = 144 // ~0.1"
+const usableWidthIn = (a4WidthTwips - certMarginTwips * 2) / 1440
+const certWidth = Math.floor(usableWidthIn * 96)
 const certHeight = Math.round((certWidth * 1550) / 1090)
 
 const doc = new Document({
@@ -370,6 +374,10 @@ const doc = new Document({
     {
       properties: {
         page: {
+          size: {
+            width: a4WidthTwips,
+            height: a4HeightTwips,
+          },
           margin: {
             top: 720,
             right: 720,
@@ -383,29 +391,21 @@ const doc = new Document({
     {
       properties: {
         page: {
+          size: {
+            width: a4WidthTwips,
+            height: a4HeightTwips,
+          },
           margin: {
-            top: 540,
-            right: 540,
-            bottom: 540,
-            left: 540,
+            top: certMarginTwips,
+            right: certMarginTwips,
+            bottom: certMarginTwips,
+            left: certMarginTwips,
           },
         },
       },
       children: [
         new Paragraph({
-          spacing: { after: 120 },
-          alignment: AlignmentType.CENTER,
-          children: [
-            new TextRun({
-              text: 'OutSystems Certifications',
-              bold: true,
-              size: 22,
-              font: 'Calibri',
-              color: seaDeep,
-            }),
-          ],
-        }),
-        new Paragraph({
+          spacing: { before: 0, after: 0 },
           alignment: AlignmentType.CENTER,
           children: [
             new ImageRun({
@@ -431,4 +431,4 @@ const doc = new Document({
 
 const buffer = await Packer.toBuffer(doc)
 writeFileSync(outDocx, buffer)
-console.log(`Wrote ${outDocx}`)
+console.log(`Wrote ${outDocx} (certificate ${certWidth}×${certHeight})`)

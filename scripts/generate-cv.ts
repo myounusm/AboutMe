@@ -278,18 +278,62 @@ const html = `<!DOCTYPE html>
       page-break-before: always;
       margin: 0;
       padding: 0;
-      width: 100%;
-      min-height: 277mm;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .cert-page img {
-      width: 100%;
-      height: auto;
-      max-height: 277mm;
-      object-fit: contain;
+    .timeline-title {
+      margin: 0 0 0.25rem;
+      font-size: 14pt;
+      color: var(--sea-deep);
+    }
+    .timeline-meta {
+      margin: 0 0 0.45rem;
+      font-size: 10pt;
+      font-weight: 700;
+      color: #e4002b;
+    }
+    .timeline-lead {
+      margin: 0 0 0.85rem;
+      font-size: 10pt;
+      color: var(--ink-soft);
+    }
+    .cert-timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border-left: 2.5px solid #e4002b;
+    }
+    .cert-timeline li {
+      position: relative;
+      margin: 0 0 0.55rem;
+      padding: 0 0 0.15rem 0.85rem;
+    }
+    .cert-timeline li::before {
+      content: '';
+      position: absolute;
+      left: -5.5px;
+      top: 0.35rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e4002b;
+    }
+    .cert-timeline strong {
       display: block;
+      font-size: 10.5pt;
+      color: var(--ink);
+    }
+    .cert-timeline span {
+      float: right;
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--sea-deep);
+    }
+    .cert-timeline em {
+      display: block;
+      margin-top: 0.1rem;
+      font-style: normal;
+      font-size: 8.5pt;
+      color: #e4002b;
+      font-weight: 650;
     }
   </style>
 </head>
@@ -416,10 +460,28 @@ const html = `<!DOCTYPE html>
   </div>
 
   <div class="sheet cert-page">
-    <img
-      src="../public/certificates/outsystems-certifications.png"
-      alt="OutSystems consolidated certifications certificate for Mohammed Younus Mohiuddin"
-    />
+    <h2 class="timeline-title">OutSystems Certification Journey</h2>
+    <p class="timeline-meta">13 certifications · O11 + ODC · Jun 2023 → Jan 2026</p>
+    <p class="timeline-lead">
+      Progressed from Associate Developer to Architecture Specialist and Tech Lead across
+      OutSystems 11 and OutSystems Developer Cloud — spanning core development, mobile,
+      security, platform operations, and architecture.
+    </p>
+    <ol class="cert-timeline">
+      <li><strong>Architecture Specialist (ODC)</strong> <span>Jan 17, 2026</span><em>Specialist · Architecture · ODC</em></li>
+      <li><strong>Platform Ops (O11)</strong> <span>Jun 24, 2025</span><em>Ops · Platform Operations · O11</em></li>
+      <li><strong>Tech Lead (O11)</strong> <span>Jun 18, 2025</span><em>Tech Lead · Leadership · O11</em></li>
+      <li><strong>Web Developer Specialist (ODC)</strong> <span>Dec 28, 2024</span><em>Specialist · Web Development · ODC</em></li>
+      <li><strong>Associate Traditional Web Developer (O11)</strong> <span>Jun 27, 2024</span><em>Associate · Traditional Web · O11</em></li>
+      <li><strong>Architecture Specialist (O11)</strong> <span>Nov 03, 2023</span><em>Specialist · Architecture · O11</em></li>
+      <li><strong>Professional Web Developer (O11)</strong> <span>Nov 03, 2023</span><em>Professional · Web Development · O11</em></li>
+      <li><strong>Professional Mobile Developer (O11)</strong> <span>Nov 03, 2023</span><em>Professional · Mobile Development · O11</em></li>
+      <li><strong>Security Specialist (O11 and ODC)</strong> <span>Sep 13, 2023</span><em>Specialist · Security · O11 &amp; ODC</em></li>
+      <li><strong>Web Developer Specialist (O11)</strong> <span>Aug 25, 2023</span><em>Specialist · Web Development · O11</em></li>
+      <li><strong>Associate Developer (ODC)</strong> <span>Jul 24, 2023</span><em>Associate · Core Development · ODC</em></li>
+      <li><strong>Mobile Developer Specialist (O11 and ODC)</strong> <span>Jul 13, 2023</span><em>Specialist · Mobile Development · O11 &amp; ODC</em></li>
+      <li><strong>Associate Developer (O11)</strong> <span>Jun 10, 2023</span><em>Associate · Core Development · O11</em></li>
+    </ol>
   </div>
 </body>
 </html>`

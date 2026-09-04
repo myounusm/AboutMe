@@ -1,13 +1,14 @@
 /**
  * Builds a Word (.docx) CV from src/content.ts into public/Mohammed_Younus_CV.docx
  */
-import { writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   AlignmentType,
   BorderStyle,
   Document,
+  ImageRun,
   Packer,
   Paragraph,
   TextRun,
@@ -25,6 +26,12 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = resolve(__dirname, '..')
 const outDocx = join(root, 'public', 'Mohammed_Younus_CV.docx')
+const certImagePath = join(
+  root,
+  'public',
+  'certificates',
+  'outsystems-certifications.png',
+)
 
 const website = 'https://www.myounusm.in'
 const seaDeep = '0F4D48'
@@ -353,6 +360,11 @@ children.push(
   }),
 )
 
+const certImage = readFileSync(certImagePath)
+// Fit certificate on a portrait page while preserving 1090×1550 aspect ratio.
+const certWidth = 520
+const certHeight = Math.round((certWidth * 1550) / 1090)
+
 const doc = new Document({
   sections: [
     {
@@ -367,6 +379,52 @@ const doc = new Document({
         },
       },
       children,
+    },
+    {
+      properties: {
+        page: {
+          margin: {
+            top: 540,
+            right: 540,
+            bottom: 540,
+            left: 540,
+          },
+        },
+      },
+      children: [
+        new Paragraph({
+          spacing: { after: 120 },
+          alignment: AlignmentType.CENTER,
+          children: [
+            new TextRun({
+              text: 'OutSystems Certifications',
+              bold: true,
+              size: 22,
+              font: 'Calibri',
+              color: seaDeep,
+            }),
+          ],
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [
+            new ImageRun({
+              type: 'png',
+              data: certImage,
+              transformation: {
+                width: certWidth,
+                height: certHeight,
+              },
+              altText: {
+                title: 'OutSystems certifications',
+                description:
+                  'Consolidated OutSystems certification certificate for Mohammed Younus Mohiuddin',
+                name: 'outsystems-certifications',
+              },
+            }),
+          ],
+        }),
+      ],
     },
   ],
 })

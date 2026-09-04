@@ -273,6 +273,22 @@ const html = `<!DOCTYPE html>
       color: var(--ink-soft);
       text-align: center;
     }
+
+    .cert-page {
+      page-break-before: always;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+    .cert-page h2 {
+      margin: 0 0 0.6rem;
+      font-size: 12pt;
+      color: var(--sea-deep);
+    }
+    .cert-page img {
+      width: 100%;
+      max-width: 170mm;
+      height: auto;
+    }
   </style>
 </head>
 <body>
@@ -395,6 +411,14 @@ const html = `<!DOCTYPE html>
     </section>
 
     <p class="footer-note">Curriculum Vitae generated from ${website} · ${escapeHtml(profile.name)}</p>
+  </div>
+
+  <div class="sheet cert-page">
+    <h2>OutSystems Certifications</h2>
+    <img
+      src="../public/certificates/outsystems-certifications.png"
+      alt="OutSystems consolidated certifications certificate for Mohammed Younus Mohiuddin"
+    />
   </div>
 </body>
 </html>`

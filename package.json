@@ -1,0 +1,20 @@
+{
+  "name": "mohammed-younus-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "cv:pdf": "tsx scripts/generate-cv.ts",
+    "cv:docx": "tsx scripts/generate-cv-docx.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.5",
+    "docx": "^9.7.1",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.0"
+  }
+}
